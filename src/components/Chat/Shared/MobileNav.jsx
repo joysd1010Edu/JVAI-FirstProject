@@ -60,7 +60,7 @@ const MobileNav = ({ isOpened, toggleOpen }) => {
 
 
 
-  return (
+  return (  
     <div className="">
       <div
         className={`w-[250px] fixed left-0 top-0 h-full text-white transition-all duration-300 z-50 nav-container font-nunito transform ${!isOpened ? '-translate-x-96' : 'translate-x-0'}`}
@@ -216,10 +216,10 @@ const MobileNav = ({ isOpened, toggleOpen }) => {
                   className="cursor-pointer"
                 />
                 <dialog id="my_modal_2" className="modal">
-                  <div
-                    className="modal-box bg-[#FFFFFF4D] px-1 py-1 w-52 absolute"
+                   <div
+                    className="modal-box bg-[#FFFFFF4D] px-1 py-1 w-40 absolute"
                     style={{
-                      left: `${modalPosition.x}px`,
+                      right: `${modalPosition.x+60}px`,
                       top: `${modalPosition.y}px`,
                       transform: 'none',
                       margin: 0
@@ -249,15 +249,15 @@ const MobileNav = ({ isOpened, toggleOpen }) => {
                   </p>
                 </div>
                 <BsThreeDots
-                  onClick={(e) => handleModalClick(e, "my_modal_2")}
+                  onClick={(e) => handleModalClick(e, "my_modal_3")}
                   size={24}
                   className="cursor-pointer"
                 />
-                <dialog id="my_modal_2" className="modal">
-                  <div
-                    className="modal-box bg-[#FFFFFF4D] px-1 py-1 w-52 absolute"
+                <dialog id="my_modal_3" className="modal">
+                   <div
+                    className="modal-box bg-[#FFFFFF4D] px-1 py-1 w-40 absolute"
                     style={{
-                      left: `${modalPosition.x}px`,
+                      right: `${modalPosition.x+60}px`,
                       top: `${modalPosition.y}px`,
                       transform: 'none',
                       margin: 0
@@ -293,17 +293,17 @@ const MobileNav = ({ isOpened, toggleOpen }) => {
                 </div>
                 {/* modal calling button modal should be called by the iterating array index or the id in the array data */}
                 <BsThreeDots
-                  onClick={(e) => handleModalClick(e, "my_modal_3")}
+                  onClick={(e) => handleModalClick(e, "my_modal_4")}
                   size={24}
                   className="cursor-pointer"
                 />
                 {/* Modal starts for the three dots */}
                 {/* Modal id should be given by the id or the index of the iterating array */}
-                <dialog id="my_modal_3" className="modal">
-                  <div
-                    className="modal-box bg-[#FFFFFF4D] px-1 py-1 w-52 absolute"
+                <dialog id="my_modal_4" className="modal">
+                   <div
+                    className="modal-box bg-[#FFFFFF4D] px-1 py-1 w-40 absolute"
                     style={{
-                      left: `${modalPosition.x}px`,
+                      right: `${modalPosition.x+60}px`,
                       top: `${modalPosition.y}px`,
                       transform: 'none',
                       margin: 0
@@ -335,17 +335,17 @@ const MobileNav = ({ isOpened, toggleOpen }) => {
                 </div>
                 {/* modal calling button modal should be called by the iterating array index or the id in the array data */}
                 <BsThreeDots
-                  onClick={(e) => handleModalClick(e, "my_modal_3")}
+                  onClick={(e) => handleModalClick(e, "my_modal_5")}
                   size={24}
                   className="cursor-pointer"
                 />
                 {/* Modal starts for the three dots */}
                 {/* Modal id should be given by the id or the index of the iterating array */}
-                <dialog id="my_modal_3" className="modal">
+                <dialog id="my_modal_5" className="modal">
                   <div
-                    className="modal-box bg-[#FFFFFF4D] px-1 py-1 w-52 absolute"
+                    className="modal-box bg-[#FFFFFF4D] px-1 py-1 w-40 absolute"
                     style={{
-                      left: `${modalPosition.x}px`,
+                      right: `${modalPosition.x+60}px`,
                       top: `${modalPosition.y}px`,
                       transform: 'none',
                       margin: 0
@@ -377,17 +377,17 @@ const MobileNav = ({ isOpened, toggleOpen }) => {
                 </div>
                 {/* modal calling button modal should be called by the iterating array index or the id in the array data */}
                 <BsThreeDots
-                  onClick={(e) => handleModalClick(e, "my_modal_3")}
+                  onClick={(e) => handleModalClick(e, "my_modal_6")}
                   size={24}
                   className="cursor-pointer"
                 />
                 {/* Modal starts for the three dots */}
                 {/* Modal id should be given by the id or the index of the iterating array */}
-                <dialog id="my_modal_3" className="modal">
+                <dialog id="my_modal_6" className="modal">
                   <div
-                    className="modal-box bg-[#FFFFFF4D] px-1 py-1 w-52 absolute"
+                    className="modal-box bg-[#FFFFFF4D] px-1 py-1 w-40 absolute"
                     style={{
-                      left: `${modalPosition.x}px`,
+                      right: `${modalPosition.x+60}px`,
                       top: `${modalPosition.y}px`,
                       transform: 'none',
                       margin: 0

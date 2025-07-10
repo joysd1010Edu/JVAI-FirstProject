@@ -225,11 +225,11 @@ const DesktopNav = () => {
                   </p>
                 </div>
                 <BsThreeDots
-                  onClick={(e) => handleModalClick(e, "my_modal_2")}
+                  onClick={(e) => handleModalClick(e, "my_modal_7")}
                   size={24}
                   className="cursor-pointer"
                 />
-                <dialog id="my_modal_2" className="modal">
+                <dialog id="my_modal_7" className="modal">
                   <div
                     className="modal-box bg-[#FFFFFF4D] px-1 py-1 w-52 absolute"
                     style={{
@@ -263,11 +263,11 @@ const DesktopNav = () => {
                   </p>
                 </div>
                 <BsThreeDots
-                  onClick={(e) => handleModalClick(e, "my_modal_2")}
+                  onClick={(e) => handleModalClick(e, "my_modal_8")}
                   size={24}
                   className="cursor-pointer"
                 />
-                <dialog id="my_modal_2" className="modal">
+                <dialog id="my_modal_8" className="modal">
                   <div
                     className="modal-box bg-[#FFFFFF4D] px-1 py-1 w-52 absolute"
                     style={{
@@ -307,13 +307,13 @@ const DesktopNav = () => {
                 </div>
                 {/* modal calling button modal should be called by the iterating array index or the id in the array data */}
                 <BsThreeDots
-                  onClick={(e) => handleModalClick(e, "my_modal_3")}
+                  onClick={(e) => handleModalClick(e, "my_modal_9")}
                   size={24}
                   className="cursor-pointer"
                 />
                 {/* Modal starts for the three dots */}
                 {/* Modal id should be given by the id or the index of the iterating array */}
-                <dialog id="my_modal_3" className="modal">
+                <dialog id="my_modal_9" className="modal">
                   <div
                     className="modal-box bg-[#FFFFFF4D] px-1 py-1 w-52 absolute"
                     style={{
@@ -349,13 +349,13 @@ const DesktopNav = () => {
                 </div>
                 {/* modal calling button modal should be called by the iterating array index or the id in the array data */}
                 <BsThreeDots
-                  onClick={(e) => handleModalClick(e, "my_modal_3")}
+                  onClick={(e) => handleModalClick(e, "my_modal_1")}
                   size={24}
                   className="cursor-pointer"
                 />
                 {/* Modal starts for the three dots */}
                 {/* Modal id should be given by the id or the index of the iterating array */}
-                <dialog id="my_modal_3" className="modal">
+                <dialog id="my_modal_1" className="modal">
                   <div
                     className="modal-box bg-[#FFFFFF4D] px-1 py-1 w-52 absolute"
                     style={{
@@ -391,13 +391,13 @@ const DesktopNav = () => {
                 </div>
                 {/* modal calling button modal should be called by the iterating array index or the id in the array data */}
                 <BsThreeDots
-                  onClick={(e) => handleModalClick(e, "my_modal_3")}
+                  onClick={(e) => handleModalClick(e, "my_modal_10")}
                   size={24}
                   className="cursor-pointer"
                 />
                 {/* Modal starts for the three dots */}
                 {/* Modal id should be given by the id or the index of the iterating array */}
-                <dialog id="my_modal_3" className="modal">
+                <dialog id="my_modal_10" className="modal">
                   <div
                     className="modal-box bg-[#FFFFFF4D] px-1 py-1 w-52 absolute"
                     style={{
