@@ -427,11 +427,12 @@ const DesktopNav = () => {
             </div>
           </nav>
         </div>
-        <div className={`flex items-center rounded-t-xl bg-[#0056F6] w-full px-5 py-2 gap-3 absolute bottom-0 `}>
+        <div className={`flex ${isCollapsed ? "pt-1" : " hidden"} items-center rounded-t-xl bg-[#0056F6] w-full px-5 py-2 gap-3 absolute bottom-0 `}>
           <TbArrowBigUpLine size={24} />
           <div>
-            <h1 className=" font-semibold text-[16px]">Subscription</h1>
+            <h1 className=" font-semibold text-[16px]">Bubscription</h1>
             <p className=" font-normal text-sm">More advanced feature</p>
+            hello world
           </div>
         </div>
       </div>
