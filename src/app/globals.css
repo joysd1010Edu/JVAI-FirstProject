@@ -38,3 +38,51 @@
   pointer-events: auto;
 }
 
+/* Custom SweetAlert styling */
+.custom-swal-popup {
+  background: #091c7c !important;
+  border: 1px solid #050714 !important;
+  border-radius: 12px !important;
+}
+
+.custom-swal-title {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+.custom-swal-content {
+  color: #ffffff !important;
+}
+
+/* SweetAlert icon styling for dark theme */
+.swal2-icon.swal2-success {
+  border-color: #ffffff !important;
+}
+
+.swal2-icon.swal2-success .swal2-success-line {
+  background-color: #ffffff !important;
+}
+
+.swal2-icon.swal2-success .swal2-success-ring {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.swal2-icon.swal2-error {
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+/* Custom button styling */
+.swal2-confirm {
+  background-color: #050714 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  padding: 12px 24px !important;
+}
+
+.swal2-confirm:hover {
+  background-color: #0a0d1f !important;
+}
+

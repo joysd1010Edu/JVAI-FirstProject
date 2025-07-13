@@ -2,6 +2,7 @@ import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
+import { AxiosProvider } from "@/providers/AxiosProvider";
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -32,9 +33,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar/>
-        {children}
-        <Footer/>
+        <AxiosProvider>
+          <Navbar/>
+          {children}
+          <Footer/>
+        </AxiosProvider>
       </body>
     </html>
   );
