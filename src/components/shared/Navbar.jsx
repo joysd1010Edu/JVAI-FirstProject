@@ -30,7 +30,7 @@ const Navbar = () => {
     return (
         <div >
             <div>
-                <div className="navbar bg-[#0000004D] blur-[300] shadow-sm lg:px-16">
+                <div className="navbar bg-[#010C4A80] blur-[300] shadow-sm lg:px-16">
                     <div className="navbar-start">
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -48,17 +48,17 @@ const Navbar = () => {
                         </div>
                         <h3>Emothrive</h3>
                     </div>
-                    <div className="navbar-center hidden lg:flex">
-                        <ul className="menu menu-horizontal px-1 text-[20px]">
+                    <div className="navbar-center hidden lg:flex ">
+                        <ul className="menu menu-horizontal gap-10 px-1 text-[20px]">
                             {
                                 navItems?.map((navItem) => (
-                                    <Link className={`ml-4 font-semibold ${pathName === navItem.path ? "text-[]" : ""}`} href={navItem.path} key={navItem.path}>{navItem.title}</Link>
+                                    <Link className={` font-semibold ${pathName === navItem.path ? "text-[]" : ""}`} href={navItem.path} key={navItem.path}>{navItem.title}</Link>
                                 ))
                             }
                         </ul>
                     </div>
                     <div className="navbar-end">
-                        <button className='btn bg-[#018001] text-white rounded-[38px] py-[10px] px-[20px]'>Try Free AI Therapy</button>
+                        <button className='btn bg-primary text-white rounded-[38px] py-[10px] px-[20px]'>Try Free AI Therapy</button>
                     </div>
                 </div>
             </div>

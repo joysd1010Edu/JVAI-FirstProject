@@ -12,6 +12,11 @@ export default {
         montserrat: ['Montserrat', 'sans-serif'],
         lemon: ['Lemon', 'cursive'],
       },
+      colors: {
+        primary: "#0056F6",
+        BgSecondary: "#76A6FF",
+        
+      },
     },
   },
   plugins: [require("daisyui")],
