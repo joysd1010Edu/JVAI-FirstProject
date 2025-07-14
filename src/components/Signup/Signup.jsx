@@ -11,6 +11,8 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
 import Swal from "sweetalert2";
+import { GoogleSign } from "@/components/GoogleSignIn/GoogleSign";
+import Link from "next/link";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -70,40 +72,51 @@ const Signup = () => {
   };
 
   const onSubmit = async () => {
-
     const formData = watch();
-    const user={
+    const user = {
       name: formData.name,
       email: formData.email,
       password: formData.password,
       password_confirm: formData.confirmPassword,
-    }
-     console.log("User Data:", user);
-     setLoading(true);
+    };
+    console.log("User Data:", user);
+    setLoading(true);
     try {
-      const response = await axios.post("/users/register/", user); 
-      if (response.status === 201||response.status === 200) {
+      const response = await axios.post("/users/register/", user);
+      console.log("Registration response:", response);
+      if (response.status === 201 || response.status === 200) {
+        const { access, refresh } = response.data;
+
+        if (access) {
+          localStorage.setItem("access", access);
+          console.log("Access token saved:", access);
+        }
+
+        if (refresh) {
+          localStorage.setItem("refresh", refresh);
+          console.log("Refresh token saved:", refresh);
+        }
+
         Swal.fire({
           title: "Success!",
           text: "Account created successfully.",
           icon: "success",
           confirmButtonText: "OK",
         });
+        window.location.href = "/chat";
         reset();
       }
     } catch (error) {
       console.error("Error during registration:", error);
       Swal.fire({
         title: "Error!",
-        text: error.response?.data?.detail || "Registration failed.",
+        text: error.response?.data?.password || "Registration failed.",
         icon: "error",
         confirmButtonText: "OK",
       });
     } finally {
       setLoading(false);
     }
-
-   
   };
 
   return (
@@ -252,22 +265,18 @@ const Signup = () => {
                   loading
                     ? "bg-gray-500 cursor-not-allowed"
                     : "bg-[#0056F6] cursor-pointer hover:bg-[#0046d6]"
-                } rounded-lg w-full text-white py-3.5 mb-5 transition-colors`}
+                } rounded-lg w-full text-white py-3.5 mb-2 transition-colors`}
               >
                 {loading ? "Creating Account..." : "Sign up"}
               </button>
+
+              <div className="flex items-center gap-3 justify-center"> <p className=" text-white font-normal">Already have an account ?</p> <Link href={'/login'} className=" text-primary"> Sign in</Link> </div>
+            
               <h3 className="text-center mb-5 text-[#EEEEEE]">
                 or continue with
               </h3>
-              <button className="bg-white rounded-lg w-full flex justify-center items-center  py-3.5 cursor-pointer mb-4">
-                <AiFillGoogleCircle
-                  color="#0056F6"
-                  size={26}
-                  className=" mx-2.5 "
-                />{" "}
-                <p>Continue with Google</p>
-              </button>
             </form>
+              <GoogleSign />
           </div>
         </div>
       </div>

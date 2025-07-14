@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import { AxiosProvider } from "@/providers/AxiosProvider";
+import AuthProvider from "@/providers/AuthProvider";
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -33,11 +34,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AxiosProvider>
-          <Navbar/>
-          {children}
-          <Footer/>
-        </AxiosProvider>
+        <AuthProvider>
+          <AxiosProvider>
+            <Navbar/>
+            {children}
+            <Footer/>
+          </AxiosProvider>
+        </AuthProvider>
       </body>
     </html>
   );
