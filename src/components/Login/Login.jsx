@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import authenticationImage from "./../../../public/authImage.png";
 import { CiMail } from "react-icons/ci";
@@ -10,6 +10,9 @@ import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
 import Swal from "sweetalert2";
 import { useAxios } from "@/providers/AxiosProvider";
+import { GoogleSign } from "@/components/GoogleSignIn/GoogleSign";
+import Link from "next/link";
+import { GoogleBtnBackend } from "../GoogleSignIn/GoogleBtnBackend";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -27,28 +30,78 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem('access');
+    console.log(process.env.NEXT_PUBLIC_API_URL_BACKEND);
+    if (token) {
+      console.log("Access token found:", token);
+      window.location.href = "/chat";
+    } else {
+      console.log("No access token found, user not logged in.");
+    }
+  }, []);
+
   const onSubmit = async (data) => {
+    
     const { email, password } = data;
     console.log("Login attempt:", { email, password });
+
     try {
       setLoading(true);
       const response = await axios.post("/users/login/", { email, password });
       console.log("Login response:", response);
+
       if (response.status === 201 || response.status === 200) {
+        const { access, refresh } = response.data;
+
+        if (access) {
+          localStorage.setItem("access", access);
+          console.log(" Access token saved:", access);
+        }
+
+        if (refresh) {
+          localStorage.setItem("refresh", refresh);
+          console.log(" Refresh token saved:", refresh);
+        }
+
         Swal.fire({
-          title: "Success!",
-          text: "Account created successfully.",
+          title: "Login Successful!",
+          text: "Welcome back! You have been logged in successfully.",
           icon: "success",
-          confirmButtonText: "OK",
+          background: "#091c7c",
+          color: "#ffffff",
+          confirmButtonColor: "#050714",
+          customClass: {
+            popup: "custom-swal-popup",
+            title: "custom-swal-title",
+            content: "custom-swal-content",
+          },
         });
+
         reset();
+
+        setTimeout(() => {
+          // window.location.href = "/chat";
+        }, 1500);
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      console.log(" Error response:", error.response?.data);
+
+      let errorMessage = "Invalid email or password. Please try again.";
+
+      if (error.response?.status === 400) {
+        errorMessage =
+          "Invalid credentials. Please check your email and password.";
+      } else if (error.response?.status === 401) {
+        errorMessage = "Unauthorized. Invalid email or password.";
+      } else if (error.response?.status >= 500) {
+        errorMessage = "Server error. Please try again later.";
       }
 
-      reset();
-    } catch (error) {
       Swal.fire({
         title: "Login Failed",
-        text: "Invalid email or password. Please try again.",
+        text: errorMessage,
         icon: "error",
         background: "#091c7c",
         color: "#ffffff",
@@ -155,25 +208,19 @@ const Login = () => {
                   loading
                     ? "bg-gray-500 cursor-not-allowed"
                     : "bg-[#0056F6] cursor-pointer hover:bg-[#0046d6]"
-                } rounded-lg w-full text-white py-3.5 mb-5 transition-colors`}
+                } rounded-lg w-full text-white py-3.5 mb-2 transition-colors`}
               >
                 {loading ? "Signing in..." : "Sign in"}
               </button>
+              <div className="flex items-center gap-3 justify-center"> <p className=" text-white font-normal">Don't have an account ?</p> <Link href={'/signup'} className=" text-primary"> Create an account</Link> </div>
               <h3 className="text-center mb-5 text-[#EEEEEE]">
                 or continue with
               </h3>
-              <button
-                className="bg-white rounded-lg w-full flex justify-center items-center py-3.5 cursor-pointer mb-4"
-                onClick={() => alert("Google Sign-In not implemented yet")}
-              >
-                <AiFillGoogleCircle
-                  color="#0056F6"
-                  size={26}
-                  className="mx-2.5"
-                />
-                <p>Continue with Google</p>
-              </button>
             </form>
+            {/* use this for front end authentication */}
+              {/* <GoogleSign /> */}
+            {/* use this for back end authentication */}
+                <GoogleBtnBackend/>
           </div>
         </div>
       </div>

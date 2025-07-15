@@ -58,7 +58,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="navbar-end">
-                        <button className='btn bg-primary text-white rounded-[38px] py-[10px] px-[20px]'>Try Free AI Therapy</button>
+                        <Link href={'/login'} className='btn bg-primary text-white rounded-[38px] py-[10px] px-[20px]'>Try Free AI Therapy</Link>
                     </div>
                 </div>
             </div>

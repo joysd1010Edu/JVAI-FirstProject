@@ -3,6 +3,8 @@ import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import { AxiosProvider } from "@/providers/AxiosProvider";
+import AuthProvider from "@/providers/AuthProvider";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -33,11 +35,15 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AxiosProvider>
-          <Navbar/>
-          {children}
-          <Footer/>
-        </AxiosProvider>
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
+          <AuthProvider>
+            <AxiosProvider>
+              <Navbar/>
+              {children}
+              <Footer/>
+            </AxiosProvider>
+          </AuthProvider>
+        </GoogleOAuthProvider>
       </body>
     </html>
   );
