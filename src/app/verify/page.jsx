@@ -1,10 +1,8 @@
-
 'use client';
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useAxios } from '@/providers/AxiosProvider';
 import { MdVerified, MdError, MdHourglassEmpty } from 'react-icons/md';
-import { HiArrowRight } from 'react-icons/hi';
 import Link from 'next/link';
 
 export default function page() {
@@ -18,32 +16,27 @@ export default function page() {
   useEffect(() => {
     const uid = params.get('uid');
     const token = params.get('token');
+   
 
     if (!uid || !token) {
-      setStatus('error');
-      setMessage('Invalid verification link. Please check your email and try again.');
+      setStatus('check-email');
+      setMessage('Please check your email to get the verification link.');
       return;
     }
 
     const verifyEmail = async () => {
       try {
         const response = await axios.get(`/users/email/verify/${uid}/${token}/`);
-        
+        console.log('Email verification response:', response.data);
         if (response.status === 200) {
           setStatus('success');
           setMessage('Email verified successfully!');
+
+          localStorage.setItem('access', response.data.access);
+          localStorage.setItem('refresh', response.data.refresh);
           
-          // Start countdown for redirect
-          const timer = setInterval(() => {
-            setCountdown((prev) => {
-              if (prev <= 1) {
-                clearInterval(timer);
-                router.push('/login');
-                return 0;
-              }
-              return prev - 1;
-            });
-          }, 1000);
+          router.push('/chat'); // Redirect to login after successful verification
+          
         }
       } catch (error) {
         setStatus('error');
@@ -69,6 +62,8 @@ export default function page() {
         return <MdVerified className="text-6xl text-green-500 animate-bounce" />;
       case 'error':
         return <MdError className="text-6xl text-red-500" />;
+      case 'check-email':
+        return <MdHourglassEmpty className="text-6xl text-blue-500" />;
       default:
         return <MdHourglassEmpty className="text-6xl text-yellow-500" />;
     }
@@ -82,6 +77,8 @@ export default function page() {
         return 'from-green-50 to-emerald-50';
       case 'error':
         return 'from-red-50 to-pink-50';
+      case 'check-email':
+        return 'from-blue-50 to-indigo-50';
       default:
         return 'from-gray-50 to-blue-50';
     }
@@ -95,6 +92,8 @@ export default function page() {
         return 'border-green-200';
       case 'error':
         return 'border-red-200';
+      case 'check-email':
+        return 'border-blue-200';
       default:
         return 'border-gray-200';
     }
@@ -113,6 +112,7 @@ export default function page() {
           {status === 'verifying' && 'Email Verification'}
           {status === 'success' && 'Verification Successful!'}
           {status === 'error' && 'Verification Failed'}
+          {status === 'check-email' && 'Verify Your Mail'}
         </h1>
 
         {/* Message */}
@@ -120,18 +120,15 @@ export default function page() {
           {message}
         </p>
 
-        {/* Success State - Countdown */}
+        {/* Success State */}
         {status === 'success' && (
           <div className="bg-green-100 border border-green-200 rounded-lg p-4 mb-6">
             <p className="text-green-700 font-medium">
-              Redirecting to login in {countdown} seconds...
+              Your email has been successfully verified!
             </p>
-            <div className="w-full bg-green-200 rounded-full h-2 mt-2">
-              <div 
-                className="bg-green-500 h-2 rounded-full transition-all duration-1000 ease-linear"
-                style={{ width: `${((3 - countdown) / 3) * 100}%` }}
-              ></div>
-            </div>
+            <p className="text-green-600 text-sm mt-1">
+              You can now proceed to login with your credentials.
+            </p>
           </div>
         )}
 
@@ -143,8 +140,18 @@ export default function page() {
               className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 group"
             >
               Continue to Login
-              <HiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
+          )}
+
+          {status === 'check-email' && (
+            <a 
+              href="https://mail.google.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+            >
+              Visit Gmail
+            </a>
           )}
 
           {status === 'error' && (

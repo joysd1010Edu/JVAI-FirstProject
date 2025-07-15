@@ -13,6 +13,7 @@ import { IoEye } from "react-icons/io5";
 import Swal from "sweetalert2";
 import { GoogleSign } from "@/components/GoogleSignIn/GoogleSign";
 import Link from "next/link";
+import { GoogleBtnBackend } from "../GoogleSignIn/GoogleBtnBackend";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -83,8 +84,8 @@ const Signup = () => {
     setLoading(true);
     try {
       const response = await axios.post("/users/register/", user);
-      console.log("Registration response:", response);
       if (response.status === 201 || response.status === 200) {
+        console.log("Registration successful:", response.data);
         const { access, refresh } = response.data;
 
         if (access) {
@@ -103,7 +104,7 @@ const Signup = () => {
           icon: "success",
           confirmButtonText: "OK",
         });
-        window.location.href = "/chat";
+        window.location.href = "/verify";
         reset();
       }
     } catch (error) {
@@ -276,7 +277,10 @@ const Signup = () => {
                 or continue with
               </h3>
             </form>
-              <GoogleSign />
+            {/* Use this for frontend authentication */}
+              {/* <GoogleSign /> */}
+            {/* Use this for backend authentication */}
+              <GoogleBtnBackend/>
           </div>
         </div>
       </div>

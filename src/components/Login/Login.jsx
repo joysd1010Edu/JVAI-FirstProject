@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import { useAxios } from "@/providers/AxiosProvider";
 import { GoogleSign } from "@/components/GoogleSignIn/GoogleSign";
 import Link from "next/link";
+import { GoogleBtnBackend } from "../GoogleSignIn/GoogleBtnBackend";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -31,6 +32,7 @@ const Login = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('access');
+    console.log(process.env.NEXT_PUBLIC_API_URL_BACKEND);
     if (token) {
       console.log("Access token found:", token);
       window.location.href = "/chat";
@@ -40,6 +42,7 @@ const Login = () => {
   }, []);
 
   const onSubmit = async (data) => {
+    
     const { email, password } = data;
     console.log("Login attempt:", { email, password });
 
@@ -78,7 +81,7 @@ const Login = () => {
         reset();
 
         setTimeout(() => {
-          window.location.href = "/chat";
+          // window.location.href = "/chat";
         }, 1500);
       }
     } catch (error) {
@@ -214,7 +217,10 @@ const Login = () => {
                 or continue with
               </h3>
             </form>
-              <GoogleSign />
+            {/* use this for front end authentication */}
+              {/* <GoogleSign /> */}
+            {/* use this for back end authentication */}
+                <GoogleBtnBackend/>
           </div>
         </div>
       </div>

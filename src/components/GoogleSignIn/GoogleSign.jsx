@@ -7,7 +7,7 @@ export const GoogleSign = () => {
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    localStorage.setItem('session', JSON.stringify(session));
+    
     if (session?.backendTokens) {
       try {
         // Store backend tokens
