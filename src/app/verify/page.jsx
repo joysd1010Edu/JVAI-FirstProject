@@ -1,11 +1,11 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useAxios } from '@/providers/AxiosProvider';
 import { MdVerified, MdError, MdHourglassEmpty } from 'react-icons/md';
 import Link from 'next/link';
 
-export default function page() {
+function VerifyContent() {
   const [status, setStatus] = useState('verifying'); 
   const [message, setMessage] = useState('Verifying your email...');
   const [countdown, setCountdown] = useState(3);
@@ -191,5 +191,25 @@ export default function page() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function page() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl border-2 border-yellow-200 p-8 text-center">
+          <div className="mb-6 flex justify-center">
+            <MdHourglassEmpty className="text-6xl text-yellow-500 animate-pulse" />
+          </div>
+          <h1 className="text-3xl font-bold text-gray-800 mb-4">Loading...</h1>
+          <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+            Please wait while we load the verification page...
+          </p>
+        </div>
+      </div>
+    }>
+      <VerifyContent />
+    </Suspense>
   );
 }

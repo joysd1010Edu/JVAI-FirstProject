@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "proxy": "https://stirring-camel-exotic.ngrok-free.app",
   "dependencies": {
     "@react-oauth/google": "^0.12.2",
     "axios": "^1.10.0",
