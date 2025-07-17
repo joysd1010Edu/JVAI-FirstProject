@@ -413,7 +413,13 @@ const MobileNav = ({ isOpened, toggleOpen }) => {
             </div>
           </nav>
         </div>
-        <div id="subscription" className={`flex items-center rounded-t-xl bg-[#0056F6] w-full px-5 py-2 gap-3 absolute bottom-0 `}>
+        <div onClick={() => {
+            // First set the flag in localStorage
+            localStorage.setItem('scrollToPricing', 'true');
+            
+           
+            window.location.href = '/';
+          }} id="subscription" className={`flex items-center rounded-t-xl bg-[#0056F6] w-full px-5 py-2 gap-3 absolute bottom-0 `}>
           <TbArrowBigUpLine size={24} />
           <div>
             <h1 className=" font-semibold text-[16px]">Subscription</h1>

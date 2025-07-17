@@ -30,17 +30,6 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem('access');
-    console.log(process.env.NEXT_PUBLIC_API_URL_BACKEND);
-    if (token) {
-      console.log("Access token found:", token);
-      window.location.href = "/chat";
-    } else {
-      console.log("No access token found, user not logged in.");
-    }
-  }, []);
-
   const onSubmit = async (data) => {
     
     const { email, password } = data;
@@ -81,7 +70,7 @@ const Login = () => {
         reset();
 
         setTimeout(() => {
-          // window.location.href = "/chat";
+          window.location.href = "/chat";  
         }, 1500);
       }
     } catch (error) {

@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div>
       <div style={{
-        background: 'radial-gradient(circle at center, #0129F470 5%, rgba(1, 12, 74, 0.20) 70%, #010C4A33 100%)',
+        background: 'radial-gradient(circle at center, #0129F470 15%, #000F5C 30%, #00030F 70%)',
       }} className='h-[800px] mx-auto'>
         <div className='flex justify-center items-center'>
           <button className='bg-[#F9F9F9] text-[20px] text-primary rounded-[50px] px-[20px] py-[2px] lg:mt-[107px]'>Mental Health Care</button>

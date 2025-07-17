@@ -1,79 +1,157 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useRef, useState } from "react";
 import { MdOutlineStar } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 import { useAxios } from "@/providers/AxiosProvider";
-import { set } from "react-hook-form";
+
+
+export const priceRefExport = {current: null};
+
+// Helper function for better scrolling
+const scrollToElement = (element) => {
+  if (!element) return;
+  
+  // Try smooth scrolling first
+  try {
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  } catch (error) {
+    //for browsers that don't support smooth scrolling
+    const y = element.getBoundingClientRect().top + window.pageYOffset - 80; // 80px offset for any headers
+    window.scrollTo({
+      top: y,
+      behavior: 'smooth'
+    });
+  }
+};
 
 const Ratting = () => {
   const axios = useAxios();
   const [plans, setPlans] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const priceRef = useRef(null);
+
+  const fetchPlans = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await axios.get("/api/subscriptions/plans/");
+
+      setPlans(response.data);
+    } catch (error) {
+      console.error("Error fetching plans:", error);
+      setError(error.message || "Failed to fetch plans");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchPlans = async () => {
-      setLoading(true);
-      setError(null);
-
-      // Approach 1: Using fetch API
-      try {
-        console.log("Fetching with native fetch API...");
-        const response = await fetch(
-          "http://localhost:8000/api/subscriptions/plans/",
-          {
-            method: "GET",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            // Add these options to handle potential CORS issues
-            mode: "cors",
-            cache: "no-cache",
-          }
-        );
-
-        console.log("Fetch response status:", response.status);
-        const data = await response.json();
-        console.log("Fetch response data:", data);
-
-        if (!response.ok) {
-          throw new Error(`API responded with status: ${response.status}`);
-        }
-        setPlans(data);
-        setLoading(false);
-        return; // Exit if successful
-      } catch (fetchError) {
-        console.error("Fetch error:", fetchError);
-        
-      }
-
-   
-    };
-
     fetchPlans();
-  }, [axios]);
+    priceRefExport.current = priceRef.current;
+  }, []);
 
-  console.log("Current plans state:", plans);
+  // Effect to handle scrolling to the pricing section
+  useEffect(() => {
+    const checkAndScroll = () => {
+      
+      const shouldScroll = localStorage.getItem('scrollToPricing') === 'true';
+      
+      // Check for URL hash (alternative method)
+      const urlHash = window.location.hash;
+      const hasHashTarget = urlHash === '#pricing' || urlHash === '#pricing-section';
+      
+      console.log('Ratting component mounted, should scroll:', shouldScroll, 'hash:', urlHash);
+      
+      if (shouldScroll || hasHashTarget) {
+        // Give time for the component to fully render
+        const timer = setTimeout(() => {
+          console.log('Scrolling to pricing section');
+          if (priceRef.current) {
+            scrollToElement(priceRef.current);
+            console.log('Scroll initiated to element:', priceRef.current);
+          } else {
+            console.log('Price reference not found');
+            // Try to find the element by ID as a fallback
+            const pricingSection = document.getElementById('pricing-section');
+            if (pricingSection) {
+              scrollToElement(pricingSection);
+              console.log('Fallback scroll to pricing section by ID');
+            }
+          }
+          // Clear the flag after scrolling
+          localStorage.removeItem('scrollToPricing');
+        }, 800);
+        
+        return timer;
+      }
+      return null;
+    };
+    
+    const timerId = checkAndScroll();
+    
+    // Also listen for popstate events (browser back/forward)
+    const handlePopState = () => {
+      checkAndScroll();
+    };
+    
+    window.addEventListener('popstate', handlePopState);
+    
+    return () => {
+      if (timerId) clearTimeout(timerId);
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+  
+  // Update exported ref when the internal ref changes and also check for scroll after plans loaded
+  useEffect(() => {
+    if (priceRef.current) {
+      priceRefExport.current = priceRef.current;
+      console.log('Exported price ref updated');
+      
+      // Check if we still need to scroll (in case the first attempt failed)
+      const shouldScroll = localStorage.getItem('scrollToPricing') === 'true';
+      if (shouldScroll) {
+        console.log('Second attempt to scroll after plans loaded');
+        const timer = setTimeout(() => {
+          scrollToElement(priceRef.current);
+          localStorage.removeItem('scrollToPricing');
+        }, 500);
+        
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [plans]);
+  
+  console.log("Plans data:", plans);
+
+  const handlePlanClick = async (planId) => {
+    const res = await axios.post(
+      `/api/subscriptions/create-checkout-session/`,
+      { plan_id: planId }
+    );
+
+    if (res.status === 200) {
+      console.log("Plan clicked:", planId);
+      console.log("response:", res.data);
+      window.location.href = res.data.url;
+    }
+  };
+
+  // For testing the scroll functionality
+  const scrollToPricing = () => {
+    if (priceRef.current) {
+      scrollToElement(priceRef.current);
+    }
+  };
 
   return (
-    <div className=" bg-black">
-      {/* Debug section - you can remove this later */}
-
-      <div className="p-4 mx-auto max-w-4xl bg-gray-900 rounded-lg">
-        <h2 className="text-white text-xl mb-2">API Debug:</h2>
-        <div className="mb-2">
-          <span className="text-white">
-            Status: {loading ? "Loading..." : error ? "Error" : "Success"}
-          </span>
-          {error && <p className="text-red-500">{error}</p>}
-        </div>
-        <pre className="text-xs text-gray-300 bg-gray-800 p-2 rounded overflow-auto max-h-40">
-          {plans ? JSON.stringify(plans, null, 2) : "No data yet"}
-        </pre>
-      </div>
-
+    <div className=" bg-black lg:px-16 px-5">
       <div className="flex justify-center pt-32">
         <div className="w-48 h-7 flex justify-center items-center">
           <h1 className="text-primary border border-primary px-5 py-0.5 rounded-sm text-center">
@@ -159,160 +237,109 @@ const Ratting = () => {
       </div>
 
       {/*Our Pricing Plans*/}
-      <div>
+      <div id="pricing-section">
         <div className="flex justify-center mt-24">
           <h1 className="text-white border border-white rounded-sm w-32 text-center">
             Our Pricing Plans
           </h1>
         </div>
         <h1 className="text-center mt-7 text-4xl font-bold">
-          Accessible{" "}
-          <span className="italic text-primary">therapy</span> for every mind
+          Accessible <span className="italic text-primary">therapy</span> for
+          every mind
         </h1>
 
-        <div className="mt-16 pb-20 lg:pb-30 lg:flex lg:gap-6 justify-center">
-          <div className="lg:w-[424px] hover:border-white border-transparent duration-300 border-2 min-h-[520px] bg-[#001742] rounded-xl">
-            <h1 className=" lg:mt-12 text-[#3179FF] text-3xl text-center">
-              {" "}
-              Basic Plan
-            </h1>
-            <h3 className="mt-2.5 text-xl text-white text-center">
-              Casual users needing regular suppor
-            </h3>
-
-            <div className="flex gap-1.5 items-center mt-12 ml-12">
-              <FaCheck className="text-[#216FFF] font-bold text-xl" />
-              <h3 className="text-white">Unlimited AI text-based sessions</h3>
+        <div 
+          ref={priceRef}
+          id="pricing-container"
+          className="mt-16 pb-20 lg:pb-30 lg:flex-row flex flex-col gap-6 justify-center"
+        >
+          {loading ? (
+            <div className="flex flex-col items-center justify-center py-20">
+              <div className="relative w-24 h-24">
+                <div className="absolute top-0 left-0 right-0 bottom-0 border-4 border-t-primary border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
+                <div
+                  className="absolute top-2 left-2 right-2 bottom-2 border-4 border-t-transparent border-r-primary border-b-transparent border-l-transparent rounded-full animate-spin"
+                  style={{
+                    animationDirection: "reverse",
+                    animationDuration: "1s",
+                  }}
+                ></div>
+                <div
+                  className="absolute top-4 left-4 right-4 bottom-4 border-4 border-t-transparent border-r-transparent border-b-primary border-l-transparent rounded-full animate-spin"
+                  style={{ animationDuration: "1.5s" }}
+                ></div>
+              </div>
+              <p className="mt-4 text-white text-lg">
+                Loading pricing plans...
+              </p>
             </div>
-
-            <div className="flex gap-1.5 items-center mt-5 ml-12">
-              <FaCheck className="text-[#216FFF] font-bold text-xl" />
-              <h3 className="text-white">Emotion-aware AI responses</h3>
-            </div>
-
-            <div className="flex gap-1.5 items-center mt-5 ml-12">
-              <FaCheck className="text-[#216FFF] font-bold text-xl" />
-              <h3 className="text-white">
-                Personalized mental health insights
-              </h3>
-            </div>
-
-            <div className="flex gap-1.5 items-center mt-5 ml-12">
-              <FaCheck className="text-[#216FFF] font-bold text-xl" />
-              <h3 className="text-white">
-                Guided meditations & calming audios
-              </h3>
-            </div>
-
-            <div className="flex gap-1.5 items-center mt-5 ml-12">
-              <FaCheck className="text-[#216FFF] font-bold text-xl" />
-              <h3 className="text-white">Validity - 7 days</h3>
-            </div>
-            <h1 className="text-center text-white font-bold text-xl mt-12">
-              $19
-            </h1>
-            <div className="flex justify-center mt-4">
-              <button className="text-white bg-primary cursor-pointer rounded px-24 py-1.5">
-                Choose this plan
+          ) : error ? (
+            <div className="bg-[#001742] p-8 rounded-xl text-center">
+              <p className="text-red-400 mb-2">Unable to load plans</p>
+              <p className="text-gray-400 text-sm mb-4">{error}</p>
+              <button
+                onClick={() => fetchPlans()}
+                className="bg-primary px-6 py-2 rounded text-white"
+              >
+                Retry
               </button>
             </div>
-          </div>
+          ) : (
+            plans &&
+            plans.map((plan, index) => (
+              <div
+                key={plan.id}
+                className="lg:w-[424px] relative hover:border-white border-transparent duration-300 border-2 min-h-[520px] bg-[#001742] rounded-xl flex flex-col justify-between p-6"
+              >
+                
+                <div>
+                  <h1 className="lg:mt-8 text-[#3179FF] text-3xl text-center">
+                    {plan.name}
+                  </h1>
+                  <h3 className="mt-2.5 text-xl text-white text-center">
+                    {plan.description}
+                  </h3>
 
-          <div className="lg:w-[424px] relative min-h-[520px] hover:border-white border-transparent duration-300 border-2 bg-[#001742] rounded-xl">
-            <h1 className="mt-12 text-[#3179FF] text-3xl text-center">
-              Standard Plan
-            </h1>
-            <h3 className="mt-2.5 text-xl text-white text-center">
-              Casual users needing regular suppor
-            </h3>
+                  {plan.recommended && (
+                    <div className="absolute top-0 right-0 py-2.5 px-2.5 rounded-bl-xl rounded-tr-xl bg-[#216FFF]">
+                      Recommended
+                    </div>
+                  )}
 
-            <div className=" absolute top-0 right-0 py-2.5 px-2.5 rounded-bl-xl rounded-tr-xl bg-[#216FFF]">
-              Recommended
-            </div>
+                  {plan.features.length > 0 &&
+                    plan?.features?.split("\\n").map((feature, index) => (
+                      <div
+                        key={index}
+                        className="flex gap-1.5 items-center py-3 ml-12"
+                      >
+                        <FaCheck className="text-[#216FFF] font-bold text-xl" />
+                        <h3 className="text-white">{feature}</h3>
+                      </div>
+                    ))}
 
-            <div className="flex gap-1.5 items-center mt-12 ml-12">
-              <FaCheck className="text-[#216FFF] font-bold text-xl" />
-              <h3 className="text-white">Unlimited AI text-based sessions</h3>
-            </div>
+                  <div className="flex gap-1.5 items-center mt-5 ml-12">
+                    <FaCheck className="text-[#216FFF] font-bold text-xl" />
+                    <h3 className="text-white">
+                      Validity - {plan.duration_days} days
+                    </h3>
+                  </div>
+                </div>
 
-            <div className="flex gap-1.5 items-center mt-5 ml-12">
-              <FaCheck className="text-[#216FFF] font-bold text-xl" />
-              <h3 className="text-white">Emotion-aware AI responses</h3>
-            </div>
-
-            <div className="flex gap-1.5 items-center mt-5 ml-12">
-              <FaCheck className="text-[#216FFF] font-bold text-xl" />
-              <h3 className="text-white">
-                Personalized mental health insights
-              </h3>
-            </div>
-
-            <div className="flex gap-1.5 items-center mt-5 ml-12">
-              <FaCheck className="text-[#216FFF] font-bold text-xl" />
-              <h3 className="text-white">
-                Guided meditations & calming audios
-              </h3>
-            </div>
-
-            <div className="flex gap-1.5 items-center mt-5 ml-12">
-              <FaCheck className="text-[#216FFF] font-bold text-xl" />
-              <h3 className="text-white">Validity - 7 days</h3>
-            </div>
-            <h1 className="text-center text-white font-bold text-xl mt-12">
-              $19
-            </h1>
-            <div className="flex justify-center mt-4">
-              <button className="text-white bg-primary cursor-pointer rounded px-24 py-1.5">
-                Choose this plan
-              </button>
-            </div>
-          </div>
-
-          <div className="lg:w-[424px] min-h-[520px] hover:border-white border-transparent duration-300 border-2 bg-[#001742] rounded-xl">
-            <h1 className="mt-12 text-[#3179FF] text-3xl text-center">
-              Premium Plan
-            </h1>
-            <h3 className="mt-2.5 text-xl text-white text-center">
-              Casual users needing regular suppor
-            </h3>
-
-            <div className="flex gap-1.5 items-center mt-12 ml-12">
-              <FaCheck className="text-[#216FFF] font-bold text-xl" />
-              <h3 className="text-white">Unlimited AI text-based sessions</h3>
-            </div>
-
-            <div className="flex gap-1.5 items-center mt-5 ml-12">
-              <FaCheck className="text-[#216FFF] font-bold text-xl" />
-              <h3 className="text-white">Emotion-aware AI responses</h3>
-            </div>
-
-            <div className="flex gap-1.5 items-center mt-5 ml-12">
-              <FaCheck className="text-[#216FFF] font-bold text-xl" />
-              <h3 className="text-white">
-                Personalized mental health insights
-              </h3>
-            </div>
-
-            <div className="flex gap-1.5 items-center mt-5 ml-12">
-              <FaCheck className="text-[#216FFF] font-bold text-xl" />
-              <h3 className="text-white">
-                Guided meditations & calming audios
-              </h3>
-            </div>
-
-            <div className="flex gap-1.5 items-center mt-5 ml-12">
-              <FaCheck className="text-[#216FFF] font-bold text-xl" />
-              <h3 className="text-white">Validity - 7 days</h3>
-            </div>
-            <h1 className="text-center text-white font-bold text-xl mt-12">
-              $19
-            </h1>
-            <div className="flex justify-center mt-4">
-              <button className="text-white bg-primary cursor-pointer rounded px-24 py-1.5">
-                Choose this plan
-              </button>
-            </div>
-          </div>
+                
+                <div className="mt-8">
+                  <h1 className="text-center text-white font-bold text-xl mb-4">
+                    {plan.price} $
+                  </h1>
+                  <button
+                    onClick={() => handlePlanClick(plan.id)}
+                    className="flex justify-center text-white bg-primary cursor-pointer rounded mx-auto w-2/3 py-1.5"
+                  >
+                    Choose this plan
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>
@@ -320,3 +347,4 @@ const Ratting = () => {
 };
 
 export default Ratting;
+export { Ratting };

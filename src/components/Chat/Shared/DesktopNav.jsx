@@ -1,5 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { priceRefExport } from "@/components/HomePage/RattingSection/Ratting";
 import { IoIosArrowForward } from "react-icons/io";
 import { LuMessageCircleMore } from "react-icons/lu";
 import { LuHistory } from "react-icons/lu";
@@ -9,10 +12,8 @@ import { IoBookOutline } from "react-icons/io5";
 import { IoSearchOutline } from "react-icons/io5";
 import { TbArrowBigUpLine } from "react-icons/tb";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { BsThreeDots } from "react-icons/bs";
 import { IoMdShare } from "react-icons/io";
-import { RiDeleteBin6Line } from "react-icons/ri";
 
 const DesktopNav = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -427,7 +428,16 @@ const DesktopNav = () => {
             </div>
           </nav>
         </div>
-        <div className={`flex items-center rounded-t-xl bg-[#0056F6]  ${!isCollapsed ? "pt-1" : " hidden"} w-full px-5 py-2 gap-3 absolute bottom-0 `}>
+        <div 
+          onClick={() => {
+            // First set the flag in localStorage
+            localStorage.setItem('scrollToPricing', 'true');
+            
+            // Navigate to the home page with a hash fragment
+            window.location.href = '/';
+          }}
+          className={`flex items-center rounded-t-xl bg-[#0056F6] cursor-pointer ${!isCollapsed ? "pt-1" : " hidden"} w-full px-5 py-2 gap-3 absolute bottom-0 `}
+        >
           <TbArrowBigUpLine size={24} />
           <div>
             <h1 className=" font-semibold text-[16px]">Subscription</h1>

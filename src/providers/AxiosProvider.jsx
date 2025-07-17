@@ -2,30 +2,30 @@
 import React, { createContext, useContext } from 'react';
 import axios from 'axios';
 
-// Set a default backend URL if the environment variable is not set
-const backendUrl = process.env.NEXT_PUBLIC_API_URL_BACKEND || 'https://stirring-camel-exotic.ngrok-free.app';
-
-console.log('Using backend URL:', backendUrl);
 
 const axiosInstance = axios.create({
-  baseURL: backendUrl,
-  timeout: 15000, // Increased timeout
+  baseURL: 'http://192.168.10.37:8000', 
+  timeout: 10000, 
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   },
+  withCredentials: false, 
 });
+
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    // For debugging
-    console.log('Making request to:', `${config.baseURL}${config.url}`);
-    console.log('Request headers:', config.headers);
     
-    // Add auth token if available
     const token = typeof window !== 'undefined' ? localStorage.getItem('access') : null;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+    }
+    
+    
+    if (config.url && !config.url.startsWith('http') && config.url.startsWith('/api')) {
+      
+      console.log('Making API request to:', config.url);
     }
     
     return config;
@@ -36,25 +36,38 @@ axiosInstance.interceptors.request.use(
   }
 );
 
+
 axiosInstance.interceptors.response.use(
   (response) => {
     console.log('Response received:', response.status);
-    console.log('Response headers:', response.headers);
     return response;
   },
   (error) => {
+    
     console.error('Response error:', error);
+    if (error.request && !error.response) {
+      console.error('Network error detected - no response received');
+    }
+    
     
     if (error.response?.status === 401) {
-      localStorage.removeItem('authToken');
-      window.location.href = '/login';
+      // Remove the correct token names that match what you're setting in the Login component
+      localStorage.removeItem('access');
+      localStorage.removeItem('refresh');
+      
+      // Check if we're not already on the login page to prevent redirect loops
+      if (typeof window !== 'undefined' && window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
     }
     
     return Promise.reject(error);
   }
 );
 
+
 const AxiosContext = createContext(null);
+
 
 export const AxiosProvider = ({ children }) => {
   return (
@@ -63,6 +76,7 @@ export const AxiosProvider = ({ children }) => {
     </AxiosContext.Provider>
   );
 };
+
 
 export const useAxios = () => {
   const context = useContext(AxiosContext);

@@ -145,12 +145,12 @@ function VerifyContent() {
 
           {status === 'check-email' && (
             <a 
-              href="https://mail.google.com"
+              href="mailto:"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
             >
-              Visit Gmail
+              Visit Mail
             </a>
           )}
 
