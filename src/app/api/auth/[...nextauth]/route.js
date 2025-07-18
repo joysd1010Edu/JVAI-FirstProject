@@ -31,7 +31,6 @@ const handler = NextAuth({
     },
     async signIn({ user, account, profile }) {
       // You can send user data to your backend here
-      console.log('Google Sign-In Success:', { user, account, profile })
       
       // Make API call to your backend to create/update user
       try {
@@ -52,7 +51,6 @@ const handler = NextAuth({
         
         if (response.ok) {
           const userData = await response.json()
-          console.log('Backend auth success:', userData)
           
           // Store backend tokens in user object for client-side access
           user.backendTokens = {

@@ -27,7 +27,6 @@ const DesktopNav = () => {
   const onSearchSubmit = (e) => {
     e.preventDefault();
     const value = e.target.search.value;
-    console.log("search value:", value);
   };
   const toggleSearch = () => {
     setIsSearchExpanded(!isSearchExpanded);
@@ -166,7 +165,7 @@ const DesktopNav = () => {
               {!isCollapsed && <h1>Task</h1>}
             </Link>
             <Link
-              href={"/"}
+              href={"/chat/music"}
               className={`flex items-center ${isCollapsed ? "justify-center" : "gap-3"} hover:bg-white hover:text-[#0056F6] px-2.5 py-3 rounded-sm font-semibold ${
                 pathname === "/" ? "bg-white text-[#0056F6]" : ""
               }`}

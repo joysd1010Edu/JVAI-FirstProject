@@ -36,6 +36,8 @@ const Ratting = () => {
   const priceRef = useRef(null);
 
   const fetchPlans = async () => {
+    const normal = await fetch('http://10.10.12.53:8000/api/subscriptions/plans/');
+    const data = await normal.json();
     setLoading(true);
     setError(null);
 
@@ -52,6 +54,7 @@ const Ratting = () => {
   };
 
   useEffect(() => {
+
     fetchPlans();
     priceRefExport.current = priceRef.current;
   }, []);
@@ -66,22 +69,17 @@ const Ratting = () => {
       const urlHash = window.location.hash;
       const hasHashTarget = urlHash === '#pricing' || urlHash === '#pricing-section';
       
-      console.log('Ratting component mounted, should scroll:', shouldScroll, 'hash:', urlHash);
       
       if (shouldScroll || hasHashTarget) {
         // Give time for the component to fully render
         const timer = setTimeout(() => {
-          console.log('Scrolling to pricing section');
           if (priceRef.current) {
             scrollToElement(priceRef.current);
-            console.log('Scroll initiated to element:', priceRef.current);
           } else {
-            console.log('Price reference not found');
             // Try to find the element by ID as a fallback
             const pricingSection = document.getElementById('pricing-section');
             if (pricingSection) {
               scrollToElement(pricingSection);
-              console.log('Fallback scroll to pricing section by ID');
             }
           }
           // Clear the flag after scrolling
@@ -112,12 +110,10 @@ const Ratting = () => {
   useEffect(() => {
     if (priceRef.current) {
       priceRefExport.current = priceRef.current;
-      console.log('Exported price ref updated');
       
       // Check if we still need to scroll (in case the first attempt failed)
       const shouldScroll = localStorage.getItem('scrollToPricing') === 'true';
       if (shouldScroll) {
-        console.log('Second attempt to scroll after plans loaded');
         const timer = setTimeout(() => {
           scrollToElement(priceRef.current);
           localStorage.removeItem('scrollToPricing');
@@ -128,7 +124,6 @@ const Ratting = () => {
     }
   }, [plans]);
   
-  console.log("Plans data:", plans);
 
   const handlePlanClick = async (planId) => {
     const res = await axios.post(
@@ -137,8 +132,6 @@ const Ratting = () => {
     );
 
     if (res.status === 200) {
-      console.log("Plan clicked:", planId);
-      console.log("response:", res.data);
       window.location.href = res.data.url;
     }
   };

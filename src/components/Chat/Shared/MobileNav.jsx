@@ -24,7 +24,6 @@ const MobileNav = ({ isOpened, toggleOpen }) => {
   const onSearchSubmit = (e) => {
     e.preventDefault();
     const value = e.target.search.value;
-    console.log("search value:", value);
   };
   const toggleSearch = () => {
     setIsSearchExpanded(!isSearchExpanded);

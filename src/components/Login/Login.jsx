@@ -33,24 +33,20 @@ const Login = () => {
   const onSubmit = async (data) => {
     
     const { email, password } = data;
-    console.log("Login attempt:", { email, password });
 
     try {
       setLoading(true);
       const response = await axios.post("/users/login/", { email, password });
-      console.log("Login response:", response);
 
       if (response.status === 201 || response.status === 200) {
         const { access, refresh } = response.data;
 
         if (access) {
           localStorage.setItem("access", access);
-          console.log(" Access token saved:", access);
         }
 
         if (refresh) {
           localStorage.setItem("refresh", refresh);
-          console.log(" Refresh token saved:", refresh);
         }
 
         Swal.fire({
@@ -75,7 +71,6 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Login failed:", error);
-      console.log(" Error response:", error.response?.data);
 
       let errorMessage = "Invalid email or password. Please try again.";
 

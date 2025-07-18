@@ -80,22 +80,18 @@ const Signup = () => {
       password: formData.password,
       password_confirm: formData.confirmPassword,
     };
-    console.log("User Data:", user);
     setLoading(true);
     try {
       const response = await axios.post("/users/register/", user);
       if (response.status === 201 || response.status === 200) {
-        console.log("Registration successful:", response.data);
         const { access, refresh } = response.data;
 
         if (access) {
           localStorage.setItem("access", access);
-          console.log("Access token saved:", access);
         }
 
         if (refresh) {
           localStorage.setItem("refresh", refresh);
-          console.log("Refresh token saved:", refresh);
         }
 
         Swal.fire({

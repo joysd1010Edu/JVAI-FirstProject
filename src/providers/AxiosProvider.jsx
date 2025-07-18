@@ -1,10 +1,10 @@
 "use client";
-import React, { createContext, useContext } from 'react';
+import  { createContext, useContext } from 'react';
 import axios from 'axios';
 
 
 const axiosInstance = axios.create({
-  baseURL: 'http://192.168.10.37:8000', 
+  baseURL: 'http://10.10.12.53:8000', 
   timeout: 10000, 
   headers: {
     'Content-Type': 'application/json',
@@ -25,7 +25,6 @@ axiosInstance.interceptors.request.use(
     
     if (config.url && !config.url.startsWith('http') && config.url.startsWith('/api')) {
       
-      console.log('Making API request to:', config.url);
     }
     
     return config;

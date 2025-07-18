@@ -23,11 +23,6 @@ export const GoogleSign = () => {
           localStorage.setItem('user', JSON.stringify(session.backendTokens.user));
         }
         
-        console.log('Backend tokens stored successfully', {
-          hasAccess: !!session.backendTokens.access,
-          hasRefresh: !!session.backendTokens.refresh,
-          hasUser: !!session.backendTokens.user
-        });
       } catch (error) {
         console.error('Error storing tokens to localStorage:', error);
       }
@@ -41,11 +36,6 @@ export const GoogleSign = () => {
         redirect: false, 
       });
       
-      if (result?.ok) {
-        console.log('Google Sign-In successful',result);
-      } else {
-        console.error('Google Sign-In failed:', result?.error);
-      }
     } catch (error) {
       console.error('Google Sign-In error:', error);
     }
@@ -75,7 +65,6 @@ export const GoogleSign = () => {
 
   if (session) {
 
-    console.log('Session data:', session);
     return (
       <div className="text-center">
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">

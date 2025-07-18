@@ -86,3 +86,57 @@
   background-color: #0a0d1f !important;
 }
 
+/* Music Bar Animations */
+@keyframes musicBar {
+  0%, 100% { transform: scaleY(0.5); }
+  50% { transform: scaleY(1); }
+}
+
+.animate-music-bar-1 {
+  animation: musicBar 0.8s ease-in-out infinite;
+  animation-delay: 0.1s;
+  transform-origin: bottom;
+}
+
+.animate-music-bar-2 {
+  animation: musicBar 0.7s ease-in-out infinite;
+  animation-delay: 0.2s;
+  transform-origin: bottom;
+}
+
+.animate-music-bar-3 {
+  animation: musicBar 0.9s ease-in-out infinite;
+  animation-delay: 0.3s;
+  transform-origin: bottom;
+}
+
+.animate-music-bar-4 {
+  animation: musicBar 0.6s ease-in-out infinite;
+  animation-delay: 0.4s;
+  transform-origin: bottom;
+}
+
+.animate-music-bar-5 {
+  animation: musicBar 0.8s ease-in-out infinite;
+  animation-delay: 0.5s;
+  transform-origin: bottom;
+}
+
+.animate-music-bar-6 {
+  animation: musicBar 0.7s ease-in-out infinite;
+  animation-delay: 0.6s;
+  transform-origin: bottom;
+}
+
+.animate-music-bar-7 {
+  animation: musicBar 0.9s ease-in-out infinite;
+  animation-delay: 0.7s;
+  transform-origin: bottom;
+}
+
+.animate-music-bar-8 {
+  animation: musicBar 0.6s ease-in-out infinite;
+  animation-delay: 0.8s;
+  transform-origin: bottom;
+}
+
