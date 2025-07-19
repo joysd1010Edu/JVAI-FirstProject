@@ -32,11 +32,13 @@ export default function RootLayout({ children }) {
       >
         <div className="flex h-screen overflow-hidden">
           
-          <Nav />
-          
-          {/* Main Content Area */}
+          <Nav />  
           <div className="flex-1 main-content transition-all lg:ml-[250px] duration-300" >
-            <div className="h-full overflow-auto">
+            <div  className="min-h-[100vh] lg:px-52 "
+                    style={{
+                      background:
+                        "radial-gradient(circle at top right, #0129F480 , black 40%)",
+                    }}>
               {children}
             </div>
           </div>

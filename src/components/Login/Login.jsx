@@ -38,8 +38,9 @@ const Login = () => {
       setLoading(true);
       const response = await axios.post("/users/login/", { email, password });
 
+
       if (response.status === 201 || response.status === 200) {
-        const { access, refresh } = response.data;
+        const { access, refresh ,user } = response.data;
 
         if (access) {
           localStorage.setItem("access", access);
@@ -47,6 +48,9 @@ const Login = () => {
 
         if (refresh) {
           localStorage.setItem("refresh", refresh);
+        }
+        if (user) {
+          localStorage.setItem("user", JSON.stringify(user));
         }
 
         Swal.fire({

@@ -6,11 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "copy-pdf-assets": "node copy-pdf-worker.js",
+    "postinstall": "npm run copy-pdf-assets"
   },
   "proxy": "https://stirring-camel-exotic.ngrok-free.app",
   "dependencies": {
     "@react-oauth/google": "^0.12.2",
+    "@react-pdf/renderer": "^4.3.0",
     "axios": "^1.10.0",
     "next": "^15.4.0-canary.129",
     "next-auth": "^4.24.11",
@@ -18,6 +21,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.60.0",
     "react-icons": "^5.5.0",
+    "react-pdf": "^10.0.1",
     "sweetalert2": "^11.22.2"
   },
   "devDependencies": {

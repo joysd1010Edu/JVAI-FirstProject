@@ -167,16 +167,16 @@ const DesktopNav = () => {
             <Link
               href={"/chat/music"}
               className={`flex items-center ${isCollapsed ? "justify-center" : "gap-3"} hover:bg-white hover:text-[#0056F6] px-2.5 py-3 rounded-sm font-semibold ${
-                pathname === "/" ? "bg-white text-[#0056F6]" : ""
+                pathname === "/chat/music" ? "bg-white text-[#0056F6]" : ""
               }`}
             >
               <FaHeadphones size={24} className="w-6 flex-shrink-0" />
               {!isCollapsed && <h1>Music</h1>}
             </Link>
             <Link
-              href={"/"}
+              href={"/chat/resources"}
               className={`flex items-center ${isCollapsed ? "justify-center" : "gap-3"} hover:bg-white hover:text-[#0056F6] px-2.5 py-3 rounded-sm font-semibold ${
-                pathname === "/" ? "bg-white text-[#0056F6]" : ""
+                pathname === "/chat/resources" ? "bg-white text-[#0056F6]" : ""
               }`}
             >
               <IoBookOutline size={24} className="w-6 flex-shrink-0" />
