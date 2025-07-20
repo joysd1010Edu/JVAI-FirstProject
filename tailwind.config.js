@@ -15,6 +15,7 @@ export default {
       colors: {
         primary: "#0056F6",
         BgSecondary: "#76A6FF",
+        darkText: "#001B4B"
         
       },
     },

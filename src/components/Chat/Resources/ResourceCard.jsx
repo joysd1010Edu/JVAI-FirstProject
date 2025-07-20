@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState } from "react";
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
@@ -7,7 +8,7 @@ import 'react-pdf/dist/Page/TextLayer.css';
 // Configure PDF.js worker for Next.js (following official react-pdf docs)
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-// PDF options for better compatibility
+
 const pdfOptions = {
   cMapUrl: '/cmaps/',
   cMapPacked: true,
@@ -15,11 +16,23 @@ const pdfOptions = {
 };
 
 export const ResourceCard = ({ workbook }) => {
+  const description = 'This is a sample description for the workbook. It provides an overview of the content and purpose of the workbook. This text is longer to demonstrate the show more functionality that allows users to expand and collapse';
   const [showPdf, setShowPdf] = useState(false);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
+  const truncateLength = 100; 
+  const shouldTruncate = description.length > truncateLength;
+  const displayDescription = showFullDescription || !shouldTruncate 
+    ? description 
+    : `${description.substring(0, truncateLength)}...`;
+
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
 
   function onDocumentLoadSuccess({ numPages }) {
     console.log('PDF loaded successfully, numPages:', numPages);
@@ -42,28 +55,6 @@ export const ResourceCard = ({ workbook }) => {
   const getPdfUrl = () => {
     console.log('Fetching PDF URL:', workbook.pdf_file);
     return `http://10.10.12.53:8000${workbook.pdf_file}`;
-  };
-
-  const testPdfUrl = async () => {
-    const url = getPdfUrl();
-    console.log('Testing PDF URL:', url);
-    
-    try {
-      const response = await fetch(url, { method: 'HEAD' });
-      console.log('PDF URL test result:', {
-        status: response.status,
-        statusText: response.statusText,
-        headers: Object.fromEntries(response.headers.entries())
-      });
-      
-      if (response.ok) {
-        console.log(' PDF URL is accessible');
-      } else {
-        console.log(' PDF URL returned error:', response.status);
-      }
-    } catch (error) {
-      console.error(' Failed to access PDF URL:', error);
-    }
   };
 
   const handleViewPdf = () => {
@@ -103,23 +94,38 @@ export const ResourceCard = ({ workbook }) => {
   return (
     <>
       {/* Simple Card */}
-      <div className="bg-white rounded-lg shadow-md p-4 max-w-sm text-black">
-        <h3 className="text-lg font-semibold mb-2">{workbook.title}</h3>
-        <p className="text-gray-600 text-sm mb-4">{workbook.category?.name || 'General'}</p>
+      <div className="bg-white rounded-lg grid grid-cols-2 p-3  text-black">
+        <div>
+          <Image src={workbook.banner} alt={workbook.title} width={240} height={340} className=" w-60 h-80 rounded-sm" />
+        </div>
+
+        <div className=" flex flex-col justify-between ">
+          <div>
+            <h3 className="text-[20px] text-darkText line-height font-bold font-nunito">{workbook.title}</h3>
+            {/* should update this with daynamic data currently using dummy data */}
+            <div className="pt-5 ">
+              <p className="text-[#262626] text-[16px] duration-300 transition-all font-normal">
+                {displayDescription} {shouldTruncate && (
+                <span
+                  onClick={toggleDescription}
+                  className="text-primary hover:text-blue-700 text-sm font-medium cursor-pointer"
+                >
+                  {showFullDescription ? 'Show Less' : 'Show More'}
+                </span>
+              )}
+              </p>
+             
+            </div>
+          </div>
+          
+          <button
+            onClick={handleViewPdf}
+            className="bg-primary text-white duration-500 px-4 py-2 rounded-r-full rounded-l-full hover:bg-blue-700 mr-2"
+          >
+            View PDF
+          </button>
+        </div>
         
-        <button
-          onClick={handleViewPdf}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
-        >
-          View PDF
-        </button>
-        
-        <button
-          onClick={testPdfUrl}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-        >
-          Test URL
-        </button>
       </div>
 
       {/* Simple PDF Modal */}
