@@ -1,7 +1,15 @@
 import { useMusicPlayer } from "@/contexts/MusicPlayerContext";
 import { useAxios } from "@/providers/AxiosProvider";
 import Image from "next/image";
-import { FaForward , FaBackward , FaPlay, FaPause, FaVolumeUp, FaVolumeDown, FaVolumeMute } from "react-icons/fa";
+import {
+  FaForward,
+  FaBackward,
+  FaPlay,
+  FaPause,
+  FaVolumeUp,
+  FaVolumeDown,
+  FaVolumeMute,
+} from "react-icons/fa";
 import { IoStarOutline, IoStar } from "react-icons/io5";
 import { useState, useEffect, useRef } from "react";
 
@@ -14,25 +22,36 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
   const [isAddingToFavorites, setIsAddingToFavorites] = useState(false);
   const audioRef = useRef(null);
   const axios = useAxios();
-  const UserId = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).id : null;
-  
-  
-  const { playMusic, pauseMusic, isCurrentlyPlaying, currentPlayingId } = useMusicPlayer();
+  const UserId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).id
+    : null;
+
+  const { playMusic, pauseMusic, isCurrentlyPlaying, currentPlayingId } =
+    useMusicPlayer();
   const isPlaying = isCurrentlyPlaying(music.id);
 
   // Check if music is already in favorites when component mounts
   useEffect(() => {
     const checkIfFavorite = async () => {
       if (!UserId) return;
-      
+
       try {
-        
         const response = await axios.get(`/api/music/favorites/`);
         const favorites = response.data;
-        const isAlreadyFavorite = favorites.some(fav => fav.music_id === music.id || fav.id === music.id);
-        setIsFavorite(isAlreadyFavorite);
+        if (favorites.length > 0 && favorites[0].music) {
+          const favoriteMusics = favorites[0].music;
+
+          const isAlreadyFavorite = favoriteMusics.some(
+            (favMusic) => favMusic.id === music.id
+          );
+          setIsFavorite(isAlreadyFavorite);
+        } else {
+          // No favorites found
+          setIsFavorite(false);
+        }
       } catch (error) {
         console.error("Error checking favorite status:", error);
+        setIsFavorite(false);
       }
     };
 
@@ -41,7 +60,11 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
 
   // Effect to pause this audio when another audio starts playing
   useEffect(() => {
-    if (currentPlayingId !== music.id && audioRef.current && !audioRef.current.paused) {
+    if (
+      currentPlayingId !== music.id &&
+      audioRef.current &&
+      !audioRef.current.paused
+    ) {
       audioRef.current.pause();
       setCurrentTime(audioRef.current.currentTime);
     }
@@ -59,12 +82,10 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
     try {
       if (isFavorite) {
         // Remove from favorites
-        const response = await axios.delete(
-          `http://localhost:8000/api/music/favorites/${UserId}/remove_music/`,
-          {
-            data: { music_id: music.id }
-          }
-        );
+        console.log(`Removing ${music.title} from favorites... with music id: ${music.id}`);
+        const response = await axios.delete(`/api/music/favorites/`, {
+          data: { music_id: music.id },
+        });
 
         if (response.status === 200 || response.status === 204) {
           setIsFavorite(false);
@@ -75,18 +96,18 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
           }
         }
       } else {
-        // Add to favorites
-        const response = await axios.post(
-          `http://localhost:8000/api/music/favorites/${UserId}/add_music/`,
-          {
-            music_id: music.id
-          }
+        console.log(
+          `Adding ${music.title} to favorites... with music id: ${music.id}`
         );
+        // Add to favorites
+        const response = await axios.post(`/api/music/favorites/`, {
+          music_id: music.id,
+        });
 
         if (response.status === 200 || response.status === 201) {
           setIsFavorite(true);
           console.log(`Successfully added ${music.title} to favorites`);
-          // Notify parent component to refresh favorites
+
           if (onFavoritesUpdate) {
             onFavoritesUpdate();
           }
@@ -94,10 +115,10 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
       }
     } catch (error) {
       console.error(`Error updating favorites for ${music.title}:`, error);
-      // Handle specific error cases
+
       if (error.response?.status === 400) {
         console.log("Music might already be in favorites");
-        setIsFavorite(true); // Assume it's already favorited
+        setIsFavorite(true);
       }
     } finally {
       setIsAddingToFavorites(false);
@@ -124,7 +145,7 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
   const handleLoadedMetadata = () => {
     if (audioRef.current) {
       const audioDuration = audioRef.current.duration;
-     
+
       setDuration(audioDuration);
       audioRef.current.volume = volume;
     }
@@ -182,21 +203,21 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
       const clickX = e.clientX - rect.left;
       const width = rect.width;
       const newTime = (clickX / width) * duration;
-      
+
       const clampedTime = Math.max(0, Math.min(duration, newTime));
-      console.log(`Progress bar seek for ${music.title}:`, { 
-        clampedTime, 
+      console.log(`Progress bar seek for ${music.title}:`, {
+        clampedTime,
         wasPlaying: !audioRef.current.paused,
         musicId: music.id,
-        duration
+        duration,
       });
-      
+
       // Store the current play state
       const wasPlaying = !audioRef.current.paused;
-      
+
       // Seek to new position
       audioRef.current.currentTime = clampedTime;
-      
+
       // Maintain the previous play state
       if (wasPlaying && audioRef.current.paused) {
         audioRef.current.play().catch(console.error);
@@ -207,25 +228,26 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
       console.log(`Progress click failed for ${music.title}:`, {
         hasAudioRef: !!audioRef.current,
         duration,
-        musicId: music.id
+        musicId: music.id,
       });
     }
   };
 
   const handleSkipBackward = () => {
- 
-    
     if (audioRef.current) {
       const currentAudioTime = audioRef.current.currentTime;
       const newTime = Math.max(0, currentAudioTime - 10);
-      console.log(`Setting backward time for ${music.title}:`, { currentAudioTime, newTime });
-      
+      console.log(`Setting backward time for ${music.title}:`, {
+        currentAudioTime,
+        newTime,
+      });
+
       // Store the current play state
       const wasPlaying = !audioRef.current.paused;
-      
+
       // Seek to new position
       audioRef.current.currentTime = newTime;
-      
+
       // Maintain the previous play state
       if (wasPlaying && audioRef.current.paused) {
         audioRef.current.play().catch(console.error);
@@ -236,25 +258,28 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
       console.log(`Backward skip failed for ${music.title}:`, {
         hasAudioRef: !!audioRef.current,
         duration,
-        musicId: music.id
+        musicId: music.id,
       });
     }
   };
 
   const handleSkipForward = () => {
-      
     if (audioRef.current) {
       const currentAudioTime = audioRef.current.currentTime;
       const audioDuration = audioRef.current.duration || duration || 300; // fallback to 5 minutes if duration unknown
       const newTime = Math.min(audioDuration, currentAudioTime + 10);
-      console.log(`Setting forward time for ${music.title}:`, { currentAudioTime, newTime, audioDuration });
-      
+      console.log(`Setting forward time for ${music.title}:`, {
+        currentAudioTime,
+        newTime,
+        audioDuration,
+      });
+
       // Store the current play state
       const wasPlaying = !audioRef.current.paused;
-      
+
       // Seek to new position
       audioRef.current.currentTime = newTime;
-      
+
       // Maintain the previous play state
       if (wasPlaying && audioRef.current.paused) {
         audioRef.current.play().catch(console.error);
@@ -265,7 +290,7 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
       console.log(`Forward skip failed for ${music.title}:`, {
         hasAudioRef: !!audioRef.current,
         duration,
-        musicId: music.id
+        musicId: music.id,
       });
     }
   };
@@ -274,7 +299,7 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
     if (isNaN(time)) return "0:00";
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
   const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
@@ -295,16 +320,16 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
             onClick={handleAddToFavorites}
             disabled={isAddingToFavorites || !UserId}
             className={`p-1 rounded-full transition-all duration-300 ${
-              isFavorite 
-                ? 'bg-[#005CFF] text-white' 
-                : 'text-white hover:bg-[#005CFF] hover:text-white'
-            } ${isAddingToFavorites ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+              isFavorite
+                ? " text-primary"
+                : "text-white hover:bg-[#005CFF] hover:text-white"
+            } ${
+              isAddingToFavorites
+                ? "opacity-50 cursor-not-allowed"
+                : "cursor-pointer"
+            }`}
           >
-            {isFavorite ? (
-              <IoStar size={24} />
-            ) : (
-              <IoStarOutline size={24} />
-            )}
+            {isFavorite ? <IoStar size={24} /> : <IoStarOutline size={24} />}
           </button>
         </div>
       </div>
@@ -354,23 +379,18 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
       </div>
       {/* Audio Player */}
       <div id="AudioPlayer" className="px-4 pb-4">
-        
         <audio
           ref={audioRef}
           src={music.music_file}
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
           onEnded={() => {
-           
             pauseMusic();
             setCurrentTime(0);
           }}
-          
-         
           preload="metadata"
         />
 
-        
         <div className="flex items-center gap-3 mt-3">
           {/* Current Time */}
           <span className="text-sm font-medium text-[#001B4B] min-w-[35px]">
@@ -378,16 +398,16 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
           </span>
 
           {/* Progress Bar */}
-          <div 
+          <div
             className="flex-1 bg-[#001B4B] rounded-full h-1.5 cursor-pointer relative overflow-hidden hover:h-2 transition-all duration-200"
             onClick={handleProgressClick}
           >
-            <div 
+            <div
               className="bg-[#005CFF] h-full transition-all duration-300 ease-out"
               style={{ width: `${progressPercentage}%` }}
             ></div>
             {/* Progress indicator dot */}
-            <div 
+            <div
               className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 bg-[#005CFF] rounded-full shadow-lg border-2 border-white opacity-0 hover:opacity-100 transition-opacity duration-200"
               style={{ left: `calc(${progressPercentage}% - 6px)` }}
             ></div>
@@ -400,48 +420,60 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
         </div>
 
         {/* Volume Control */}
-        {isPlaying&&<div className="flex items-center gap-3 mt-3">
-          {/* Volume Icon */}
-          <button
-            onClick={toggleMute}
-            className="flex items-center justify-center w-8 h-8 text-[#001B4B] hover:text-[#005CFF] transition-colors duration-200"
-          >
-            {isMuted || volume === 0 ? (
-              <FaVolumeMute size={16} />
-            ) : volume < 0.5 ? (
-              <FaVolumeDown size={16} />
-            ) : (
-              <FaVolumeUp size={16} />
-            )}
-          </button>
+        {isPlaying && (
+          <div className="flex items-center gap-3 mt-3">
+            {/* Volume Icon */}
+            <button
+              onClick={toggleMute}
+              className="flex items-center justify-center w-8 h-8 text-[#001B4B] hover:text-[#005CFF] transition-colors duration-200"
+            >
+              {isMuted || volume === 0 ? (
+                <FaVolumeMute size={16} />
+              ) : volume < 0.5 ? (
+                <FaVolumeDown size={16} />
+              ) : (
+                <FaVolumeUp size={16} />
+              )}
+            </button>
 
-          {/* Volume Progress Bar */}
-          <div 
-            className="flex-1 bg-[#001B4B] rounded-full h-1.5 cursor-pointer relative overflow-hidden max-w-[120px]"
-            onClick={handleVolumeClick}
-          >
-            <div 
-              className="bg-[#005CFF] h-full transition-all duration-300 ease-out"
-              style={{ width: `${isMuted ? 0 : volume * 100}%` }}
-            ></div>
+            {/* Volume Progress Bar */}
+            <div
+              className="flex-1 bg-[#001B4B] rounded-full h-1.5 cursor-pointer relative overflow-hidden max-w-[120px]"
+              onClick={handleVolumeClick}
+            >
+              <div
+                className="bg-[#005CFF] h-full transition-all duration-300 ease-out"
+                style={{ width: `${isMuted ? 0 : volume * 100}%` }}
+              ></div>
+            </div>
+
+            {/* Volume Percentage */}
+            <span className="text-xs font-medium text-[#001B4B] min-w-[35px]">
+              {Math.round((isMuted ? 0 : volume) * 100)}%
+            </span>
           </div>
-
-          {/* Volume Percentage */}
-          <span className="text-xs font-medium text-[#001B4B] min-w-[35px]">
-            {Math.round((isMuted ? 0 : volume) * 100)}%
-          </span>
-        </div>}
+        )}
       </div>
 
       {/* Play Controls */}
-      <div id="PlayPause" className="flex justify-center items-center gap-6 py-4">
+      <div
+        id="PlayPause"
+        className="flex justify-center items-center gap-6 py-4"
+      >
         {/* Backward 10s Button */}
         <button
           onClick={handleSkipBackward}
           className="flex items-center justify-center w-12 h-12 hover:bg-gray-100 rounded-full transition-colors duration-200"
           disabled={!audioRef.current}
         >
-         <FaBackward className={`${!audioRef.current ? 'text-gray-400' : 'text-[#001B4B] hover:text-[#005CFF]'}`} size={28} />
+          <FaBackward
+            className={`${
+              !audioRef.current
+                ? "text-gray-400"
+                : "text-[#001B4B] hover:text-[#005CFF]"
+            }`}
+            size={28}
+          />
         </button>
 
         {/* Play/Pause Button */}
@@ -452,10 +484,24 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
         >
           {isPlaying ? (
             // Pause Icon
-            <FaPause className={`${!audioRef.current ? 'text-gray-400' : 'text-[#001B4B] hover:text-[#005CFF]'}`} size={28} />
+            <FaPause
+              className={`${
+                !audioRef.current
+                  ? "text-gray-400"
+                  : "text-[#001B4B] hover:text-[#005CFF]"
+              }`}
+              size={28}
+            />
           ) : (
             // Play Icon
-            <FaPlay className={`${!audioRef.current ? 'text-gray-400' : 'text-[#001B4B] hover:text-[#005CFF]'}`} size={28} />
+            <FaPlay
+              className={`${
+                !audioRef.current
+                  ? "text-gray-400"
+                  : "text-[#001B4B] hover:text-[#005CFF]"
+              }`}
+              size={28}
+            />
           )}
         </button>
 
@@ -465,10 +511,16 @@ export const MusicCard = ({ music, onFavoritesUpdate }) => {
           className="flex items-center justify-center w-12 h-12 hover:bg-gray-100 rounded-full transition-colors duration-200"
           disabled={!audioRef.current}
         >
-          <FaForward className={`${!audioRef.current ? 'text-gray-400' : 'text-[#001B4B] hover:text-[#005CFF]'}`} size={28} />
+          <FaForward
+            className={`${
+              !audioRef.current
+                ? "text-gray-400"
+                : "text-[#001B4B] hover:text-[#005CFF]"
+            }`}
+            size={28}
+          />
         </button>
       </div>
-
     </div>
   );
 };

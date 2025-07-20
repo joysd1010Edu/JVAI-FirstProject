@@ -24,6 +24,7 @@ const sampleWorkbooks = [
   const [workbookData, setWorkbookData] = useState([]);
   const [filteredWorkbooks, setFilteredWorkbooks] = useState([]);
   const [filterCategories, setCategories] = useState(["All", "Favorites"]);
+  const [favoritesUpdated, setFavoritesUpdated] = useState(0);
   const axios = useAxios();
 
   useEffect(() => {
@@ -55,14 +56,42 @@ const sampleWorkbooks = [
     fetchWorkbooks();
   }, []);
 
-  const handleFilterChange = (category) => {
+  // Effect to refresh favorites when favoritesUpdated changes
+  useEffect(() => {
+    if (activeFilter === "Favorites" && favoritesUpdated > 0) {
+      handleFilterChange("Favorites");
+    }
+  }, [favoritesUpdated]);
+
+  const handleFilterChange = async (category) => {
     setActiveFilter(category);
 
     if (category === "All") {
       setFilteredWorkbooks(workbookData);
     } else if (category === "Favorites") {
-      // For demo purposes, show empty favorites
-      setFilteredWorkbooks([]);
+      // Fetch user's favorite workbooks
+      const UserId = localStorage.getItem("user") 
+        ? JSON.parse(localStorage.getItem("user")).id 
+        : null;
+      
+      if (!UserId) {
+        console.error("User not logged in");
+        setFilteredWorkbooks([]);
+        return;
+      }
+
+      try {
+        const response = await axios.get(`/api/workbook/favorites/`);
+        console.log("Fetched workbook favorites data:", response);
+
+        const favoriteWorkbooks = response.data.workbooks || [];
+
+        console.log("Extracted favorite workbooks:", favoriteWorkbooks);
+        setFilteredWorkbooks(favoriteWorkbooks);
+      } catch (error) {
+        console.error("Error fetching favorites:", error);
+        setFilteredWorkbooks([]);
+      }
     } else {
       const filtered = workbookData.filter(
         (workbook) =>
@@ -98,7 +127,7 @@ const sampleWorkbooks = [
           <ResourceCard
             key={workbook.id}
             workbook={workbook}
-            isFavorite={false} 
+            onFavoritesUpdate={() => setFavoritesUpdated(prev => prev + 1)}
           />
         ))}
       </div>

@@ -22,7 +22,7 @@ export const MusicNav = () => {
         const response = await axios.get("/api/music");
         console.log("Fetched music data:", response.data);
         response.data?.map((item) => {
-          console.log(item.category, item.id);
+          
 
           setCategories((prev) => [
             ...new Set([
@@ -67,8 +67,8 @@ export const MusicNav = () => {
 
       try {
         const response = await axios.get(`/api/music/favorites/`);
-        console.log("Fetched favorites data:", response.data);
-        setFilteredMusic(response.data);
+        console.log("Fetched favorites data:", response.data[0].music);
+        setFilteredMusic(response.data[0].music);
       } catch (error) {
         console.error("Error fetching favorites:", error);
         setFilteredMusic([]);
