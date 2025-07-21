@@ -4,9 +4,11 @@ import React from "react";
 
 const page = () => {
   return (
-    <MusicPlayerProvider>
-      <MusicNav />
-    </MusicPlayerProvider>
+    <div className=" lg:px-52 ">
+      <MusicPlayerProvider>
+        <MusicNav />
+      </MusicPlayerProvider>
+    </div>
   );
 };
 
