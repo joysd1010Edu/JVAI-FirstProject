@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { MdCheck, MdClose } from 'react-icons/md'
+import { DialogDemo } from '../ui/edit_profile_dialogue/dialogue'
 
 const ProfileWithActivity = () => {
   const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
@@ -20,9 +21,6 @@ const ProfileWithActivity = () => {
                 height={90}
                 className="rounded-full border-4 border-blue-500"
               />
-              <div className="absolute -top-2 -left-2 bg-blue-500 text-[10px] px-2 py-[2px] rounded-full font-medium">
-                ● Ellipse 1615
-              </div>
             </div>
             <div>
               <h2 className="text-2xl font-semibold text-white">Md Sohanur Rahman</h2>
@@ -30,9 +28,7 @@ const ProfileWithActivity = () => {
             </div>
           </div>
           <div className="flex justify-end md:justify-start">
-            <button className="bg-[#057DFF] text-white px-6 py-2 rounded-full text-sm font-semibold">
-              Edit
-            </button>
+              <DialogDemo/>
           </div>
         </div>
 
