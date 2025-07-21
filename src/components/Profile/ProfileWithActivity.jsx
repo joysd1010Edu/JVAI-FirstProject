@@ -1,11 +1,21 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { MdCheck, MdClose } from 'react-icons/md'
 import { DialogDemo } from '../ui/edit_profile_dialogue/dialogue'
 
 const ProfileWithActivity = () => {
-  const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
-  const activityStatus = ['check', 'check', 'check', 'check', 'check', 'check', 'cross']
+  const allDays = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
+  const allActivityStatus = ['check', 'check', 'check', 'check', 'check', 'check', 'cross']
+
+  const [dayRange, setDayRange] = useState(7)
+
+  const handleDayChange = (e) => {
+    setDayRange(Number(e.target.value))
+  }
+
+  const days = allDays.slice(0, dayRange)
+  const activityStatus = allActivityStatus.slice(0, dayRange)
 
   return (
     <div className="min-h-screen bg-[#060F25] px-0 md:px-10 py-8">
@@ -28,7 +38,7 @@ const ProfileWithActivity = () => {
             </div>
           </div>
           <div className="flex justify-end md:justify-start">
-              <DialogDemo/>
+            <DialogDemo />
           </div>
         </div>
 
@@ -36,8 +46,17 @@ const ProfileWithActivity = () => {
         <div className="bg-[#0E1B38] rounded-none md:rounded-xl px-8 py-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
             <h3 className="text-xl text-white font-semibold mb-2 sm:mb-0">Your Activity</h3>
-            <span className="text-white text-sm cursor-pointer">7 Days ⌄</span>
+            <select
+              className="text-white bg-[#0E1B38] border border-[#197BFF] px-3 py-1 rounded"
+              value={dayRange}
+              onChange={handleDayChange}
+            >
+              <option value={3}>3 Days</option>
+              <option value={5}>5 Days</option>
+              <option value={7}>7 Days</option>
+            </select>
           </div>
+
           <div className="flex flex-wrap justify-between sm:justify-around gap-4">
             {days.map((day, index) => {
               const isCheck = activityStatus[index] === 'check'
