@@ -27,7 +27,7 @@ const CommonStruggles = () => {
         
 
         <div>
-          <Image src='/project-image/rectangle.png'
+          <Image src='/longliness.png'
             alt='profile'
             width={550}
             height={550}
@@ -38,7 +38,7 @@ const CommonStruggles = () => {
       {/*Section-4*/}
       <div style={{background: "linear-gradient(253deg, rgba(1, 41, 244, 0.20) 0%, rgba(1, 12, 74, 0.20) 100%);"}} className=' lg:h-[388px] lg:flex gap-28 mt-3 lg:mt-28 justify-center items-center'>
         <div>
-          <Image src='/project-image/rectangle2.png'
+          <Image src='/bullying.png'
             alt='profile'
             width={550}
             height={550}
@@ -69,7 +69,7 @@ const CommonStruggles = () => {
         </div>
 
         <div>
-          <Image src='/project-image/rectangle3.png'
+          <Image src='/alchole.png'
             alt='profile'
             width={550}
             height={550}
@@ -80,9 +80,9 @@ const CommonStruggles = () => {
 
    
       {/*Section-6*/}
-      <div style={{background: "linear-gradient(253deg, rgba(1, 41, 244, 0.20) 0%, rgba(1, 12, 74, 0.20) 100%);"}} className=' lg:h-[388px] lg:flex gap-28 mt-3 lg:mt-28 justify-center items-center'>
+      <div style={{background: "linear-gradient(253deg, rgba(1, 41, 244, 0.20) 0%, rgba(1, 12, 74, 0.20) 100%);"}} className=' lg:h-[388px] lg:flex gap-66 mt-3 lg:mt-28 justify-center items-center'>
         <div>
-          <Image src='/project-image/rectangle2.png'
+          <Image src='/work_life.png'
             alt='profile'
             width={550}
             height={550}
@@ -102,18 +102,18 @@ const CommonStruggles = () => {
 
       
       {/*Section-7*/}
-      <div className='lg:flex gap-28 mt-28 justify-center'>
+      <div className='lg:flex gap-66 mt-28 justify-center'>
         <div>
           <h1 className="border border-white text-white mb-2 rounded-sm text-center font-semibold py-1 w-56">
             Relationship Conflicts
           </h1>
-          <h1 className=' text-2xl lg:text-4xl font-semibold mb-3'>Every relationship has its <span className='text-blue-600 italic'>challenges</span>  let’s work through them together.</h1>
-          <p className='text-lg'>Whether it's tension with a partner, misunderstandings with friends, or family stress that never seems to ease, relationship struggles can leave you emotionally drained and confused.</p>
+          <h1 className=' text-2xl lg:text-4xl font-semibold mb-3'>Every relationship has its <span className='text-blue-600 italic'>challenges</span> <br /> let’s work through them together.</h1>
+          <p className='text-lg'>Whether it's tension with a partner, misunderstandings with friends, or <br /> family stress that never seems to ease, relationship struggles can leave you <br /> emotionally drained and confused.</p>
           <Link href={'/'}><CgArrowTopRightO className='mt-3 text-4xl text-blue-600' /></Link>
         </div>
 
         <div>
-          <Image src='/project-image/rectangle3.png'
+          <Image src='/relationship.png'
             alt='profile'
             width={550}
             height={550}
@@ -122,9 +122,9 @@ const CommonStruggles = () => {
       </div>
 
       {/*Section-8*/}
-      <div style={{background: "linear-gradient(253deg, rgba(1, 41, 244, 0.20) 0%, rgba(1, 12, 74, 0.20) 100%);"}} className=' lg:h-[388px] lg:flex gap-28 mt-3 lg:mt-28 justify-center items-center'>
+      <div style={{background: "linear-gradient(253deg, rgba(1, 41, 244, 0.20) 0%, rgba(1, 12, 74, 0.20) 100%);"}} className=' lg:h-[388px] lg:flex lg:gap-66 mt-3 lg:mt-28 justify-center items-center'>
         <div>
-          <Image src='/project-image/rectangle2.png'
+          <Image src='/procrastination.png'
             alt='profile'
             width={550}
             height={550}
@@ -154,7 +154,7 @@ const CommonStruggles = () => {
         </div>
 
         <div>
-          <Image src='/project-image/rectangle3.png'
+          <Image src='/low_self.png'
             alt='profile'
             width={550}
             height={550}
@@ -163,7 +163,7 @@ const CommonStruggles = () => {
       </div>
 
       {/*Section-10*/}
-      <div style={{background: "linear-gradient(253deg, rgba(1, 41, 244, 0.20) 0%, rgba(1, 12, 74, 0.20) 100%);"}} className=' lg:h-[388px] lg:flex gap-28 mt-3 lg:mt-28 justify-center items-center'>
+      <div style={{background: "linear-gradient(253deg, rgba(1, 41, 244, 0.20) 0%, rgba(1, 12, 74, 0.20) 100%);"}} className=' lg:h-[388px] lg:flex gap-66 mt-3 lg:mt-28 justify-center items-center'>
         <div>
           <Image src='/project-image/rectangle2.png'
             alt='profile'
