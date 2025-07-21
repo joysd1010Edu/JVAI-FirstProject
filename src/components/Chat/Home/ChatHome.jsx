@@ -1,73 +1,122 @@
 "use client";
 import { Input } from "@/components/ui/input";
+import { useAxios } from "@/providers/AxiosProvider";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { MdArrowUpward, MdOutlineKeyboardVoice } from "react-icons/md";
 
 const ChatHome = () => {
   const { register, handleSubmit, reset, watch } = useForm({
     defaultValues: { message: "" },
   });
-
-  const [sampleData, setSampleData] = useState([]);
+  const axios = useAxios();
+  const router = useRouter();
+  const [MessageData, setMessageData] = useState([]);
   const [hasMessages, setHasMessages] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingMessageId, setLoadingMessageId] = useState(null);
+  const [isCreatingSession, setIsCreatingSession] = useState(false);
 
   const fadeInUpStyle = {
     animation: "fadeInUp 0.6s ease-out forwards",
   };
-
-  const MessageData = [
-    { id: 1, message: "Hi", sender: "user" },
-    { id: 2, message: "Hello! How can I assist you today?", sender: "bot" },
-
-    {
-      id: 5,
-      message: `I need "Acceptance and Commitment Therapy" idea`,
-      sender: "user",
-    },
-    {
-      id: 4,
-      message:
-        "Sure! Acceptance and Commitment Therapy (ACT) is a form of psychotherapy that uses mindfulness and behavioral change strategies to help individuals accept their thoughts and feelings rather than fighting or feeling guilty for them.",
-      sender: "bot",
-    },
-  ];
-
   const watchedMessage = watch("message");
 
-  const onSubmit = (data) => {
-    console.log("Input data:", data.message);
+  const onSubmit = async (data) => {
+    if (!data.message.trim()) return;
 
     setHasMessages(true);
+    setIsCreatingSession(true);
+    
+    // Add user message instantly
+    const userMessageId = Date.now();
+    setMessageData((prev) => [
+      ...prev,
+      {
+        id: userMessageId,
+        message: data.message,
+        sender: "user",
+        status: "success",
+      },
+    ]);
 
-    // Add user message
-    const userMessage = {
-      id: sampleData.length + 1,
-      message: data.message,
-      sender: "user",
-    };
-    setSampleData((prev) => [...prev, userMessage]);
-
-    // Add bot response after a delay
-    setTimeout(() => {
-      // Find the next unused bot message from MessageData
-      const usedBotMessages = sampleData.filter((msg) => msg.sender === "bot").map((msg) => msg.message);
-      const nextBotMsg = MessageData.find(
-        (msg) => msg.sender === "bot" && !usedBotMessages.includes(msg.message)
-      );
-
-      const botReply = nextBotMsg
-        ? { ...nextBotMsg, id: sampleData.length + 2 }
-        : {
-            id: sampleData.length + 2,
-            message: "I'm here to help! Tell me more.",
-            sender: "bot",
-          };
-
-      setSampleData((prev) => [...prev, botReply]);
-    }, 800);
+    // Add loading bot message
+    const botMessageId = userMessageId + 1;
+    setLoadingMessageId(botMessageId);
+    setMessageData((prev) => [
+      ...prev,
+      {
+        id: botMessageId,
+        message: "",
+        sender: "bot",
+        status: "loading",
+      },
+    ]);
 
     reset();
+
+    // Create new chat session and send first message
+    try {
+      const response = await axios.post("/api/therapy/chat/", {
+        message: data.message,
+      });
+
+      // Check if session was created successfully
+      if (response.status === 200 || response.status === 201) {
+        const sessionId = response.data.session_id || response.data.sessionId;
+        
+        if (sessionId) {
+          // Navigate to the new session page with a small delay to show the response
+          setTimeout(() => {
+            router.push(`/chat/${sessionId}`);
+          }, 500);
+          
+          // Update bot message with response before navigation
+          setMessageData((prev) =>
+            prev.map((msg) =>
+              msg.id === botMessageId
+                ? {
+                    ...msg,
+                    message: response.data.response?.text || "Session created! Redirecting...",
+                    status: "success",
+                  }
+                : msg
+            )
+          );
+        } else {
+          throw new Error("Session ID not received");
+        }
+      } else {
+        setMessageData((prev) =>
+          prev.map((msg) =>
+            msg.id === botMessageId
+              ? {
+                  ...msg,
+                  message: "Error creating chat session",
+                  status: "error",
+                }
+              : msg
+          )
+        );
+      }
+    } catch (error) {
+      setMessageData((prev) =>
+        prev.map((msg) =>
+          msg.id === botMessageId
+            ? {
+                ...msg,
+                message: "Failed to create chat session. Please try again.",
+                status: "error",
+              }
+            : msg
+        )
+      );
+      console.error("Error creating chat session:", error);
+    } finally {
+      setLoadingMessageId(null);
+      setIsCreatingSession(false);
+    }
   };
 
   const handleKeyPress = (e) => {
@@ -120,16 +169,16 @@ const ChatHome = () => {
         </div>
 
         <div
-          className={`flex-1 transition-all duration-1000 ease-in-out overflow-y-auto px-6 pt-6 pb-24 ${
-            hasMessages && sampleData.length > 0
+          className={`flex-1 transition-all pb-60 duration-1000 ease-in-out overflow-y-auto px-6 pt-6 ${
+            hasMessages && MessageData.length > 0
               ? "opacity-100 transform translate-y-5"
               : "opacity-0 transform translate-y-10 pointer-events-none"
           }`}
         >
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-col gap-4">
-              {sampleData.length > 0 &&
-                sampleData?.map((item) => (
+              {MessageData.length > 0 &&
+                MessageData?.map((item) => (
                   <div
                     key={item.id}
                     className={`flex animate-fadeInUp ${
@@ -143,7 +192,20 @@ const ChatHome = () => {
                           : "bg-[#FFFFFF1A] text-white mr-auto"
                       }`}
                     >
-                      <p className="text-lg">{item.message}</p>
+                      {item.status === "loading" ? (
+                        <div className="flex items-center gap-2">
+                          <div className="flex space-x-1">
+                            <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
+                            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                          </div>
+                          <span className="text-sm text-gray-300">
+                            {isCreatingSession ? "Creating session..." : "Thinking..."}
+                          </span>
+                        </div>
+                      ) : (
+                        <p className="text-lg">{item.message}</p>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -154,7 +216,7 @@ const ChatHome = () => {
         <div
           className={`transition-all  duration-500 ease-in-out z-10 ${
             hasMessages
-              ? "-translate-x-1/2 -translate-y-1/3 z-50 absolute bottom-20 left-1/2 transform w-full px-6"
+              ? "-translate-x-1/2 -translate-y-1/3 z-50 absolute bottom-5 left-1/2 transform w-full px-6"
               : "relative bottom-60 px-6 mt-8"
           }  `}
         >
@@ -165,9 +227,9 @@ const ChatHome = () => {
             <div className="relative w-full">
               <Input
                 {...register("message")}
-                className={`py-8 pr-20 text-white w-full transition-all duration-500 ${
+                className={`py-8 pr-20 text-white  w-full transition-all duration-500 ${
                   hasMessages
-                    ? "bg-[#FFFFFF33]  backdrop-blur-md border border-white/20"
+                    ? "bg-[#444a56]  backdrop-blur-md border border-white/20"
                     : "bg-[#FFFFFF33]"
                 }`}
                 type="text"

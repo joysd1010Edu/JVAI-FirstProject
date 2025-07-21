@@ -4,7 +4,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className=" lg:px-52 ">
+    <div className=" ">
       <MusicPlayerProvider>
         <MusicNav />
       </MusicPlayerProvider>

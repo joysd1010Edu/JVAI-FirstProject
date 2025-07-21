@@ -115,7 +115,7 @@ const DesktopNav = () => {
               {!isCollapsed && <h1>Start New Session</h1>}
             </Link>
             <Link
-              href={"/search"}
+              href={"/chat/history"}
               className={`flex items-center ${isCollapsed ? "justify-center" : "gap-3"} hover:bg-white hover:text-[#0056F6] px-2.5 py-3 rounded-sm font-semibold ${
                 pathname === "/search" ? "bg-white text-[#0056F6]" : ""
               }`}
