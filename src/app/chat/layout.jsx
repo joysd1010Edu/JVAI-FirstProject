@@ -34,11 +34,7 @@ export default function RootLayout({ children }) {
           
           <Nav />  
           <div className="flex-1 main-content transition-all lg:ml-[250px] duration-300" >
-            <div  className="min-h-[100vh] lg:px-52 "
-                    style={{
-                      background:
-                        "radial-gradient(circle at top right, #0129F480 , black 40%)",
-                    }}>
+            <div  className="min-h-[100vh] lg:px-52 bg-[radial-gradient(circle_at_center,_#0a1f44_0%,_#000814_100%)] border-2 border-red-600">
               {children}
             </div>
           </div>

@@ -1,11 +1,45 @@
+import ProfileWithActivity from '@/components/Profile/ProfileWithActivity'
+import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
+import Image from 'next/image'
 import React from 'react'
 import { MdArrowUpward, MdOutlineKeyboardVoice } from 'react-icons/md'
 
 const ChatHome = () => {
   return (
-     <main className="h-screen w-full bg-gradient-radial from-[#00062780] to-[#111111] flex items-center justify-center bg-[#111111]">
-      <div className="text-center text-white">
+    <div>
+      <div className='flex justify-end mt-10 '>
+           
+            <Dialog>
+        <DialogTrigger asChild>
+          <Button className='rounded-full bg-black'>
+          <Image className='rounded-full cursor-pointer ' src={"/avater.png"} alt='Profile_Image' width={50} height={50}/>
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[1075px] h-[550px] overflow-y-auto bg-blue-950 [&>button]:text-white">
+          <DialogHeader>
+            <DialogTitle>
+              <h1 className='text-center text-2xl font-bold text-white mb-6'>Edit Profile:</h1>
+              <ProfileWithActivity/>
+            </DialogTitle>
+          </DialogHeader>
+
+          
+        </DialogContent>
+      </Dialog>
+      </div>
+
+
+
+
+
+
+
+
+
+ <main className="mt-72 w-full bg-gradient-radial  flex items-center justify-center ">
+      <div className="text-center text-white ">
         <h1 className="text-3xl font-bold text-[#0059FF] ">
           Emothrive Your AI Therapist      
            </h1>
@@ -28,6 +62,8 @@ const ChatHome = () => {
 
       </div>
     </main>
+    </div>
+    
   )
 }
 
