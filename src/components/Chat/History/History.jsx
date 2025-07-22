@@ -121,7 +121,8 @@ export const History = () => {
                   {session.title || `Session ${session.id}`}
                 </span>
                 <p className="text-sm text-gray-400 mt-1">
-                  {session.createdAt ? new Date(session.createdAt).toLocaleDateString() : "No date"}
+                  {session.created_at ? new Date(session.created_at).toLocaleDateString() : "No date data found"}
+                  <span className="text-gray-500 px-3">{session.created_at ? new Date(session.created_at).toLocaleTimeString() : "No time data found"}</span>
                 </p>
               </Link>
               

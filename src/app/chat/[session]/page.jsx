@@ -273,7 +273,7 @@ const ChatSession = () => {
         </div>
 
         {/* Input Form - Fixed at bottom */}
-        <div className="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 via-black/20 to-transparent backdrop-blur-sm z-50">
+        <div className="-translate-x-1/2 -translate-y-1/3 absolute bottom-5 left-1/2 transform w-full px-6 z-50">
           <form
             className="lg:w-[920px] mx-auto"
             onSubmit={handleSubmit(onSubmit)}
