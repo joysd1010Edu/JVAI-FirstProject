@@ -157,7 +157,7 @@ const DesktopNav = () => {
               <TaskIcon
                 size={24}
                 className={`w-6 flex-shrink-0 ${
-                  pathname === "/"
+                  pathname === "/chat/task"
                     ? "fill-[#0056F6]"
                     : "fill-white group-hover:fill-[#0056F6]"
                 }`}
