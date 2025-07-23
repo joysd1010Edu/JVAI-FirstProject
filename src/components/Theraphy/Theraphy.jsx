@@ -21,7 +21,13 @@ const Theraphy = () => {
           </h1>
           <h1 className=' text-2xl lg:text-4xl font-semibold mb-3'>Anxiety, depression, <span className='text-blue-600 italic font-semibold'>negative</span> thought <br /> patterns.</h1>
           <p className='text-lg'>Helps you recognize and reframe unhelpful thoughts and behaviors through <br /> structured tools and real-time AI support</p>
-           <Link href={'/'}><CgArrowTopRightO className='mt-3 text-4xl text-blue-600' /></Link>
+           <Link href={{
+  pathname: '/theraphyDetails',
+  query: { type: 'a' } // Or 'dbt', 'act', etc.
+}}>
+  <CgArrowTopRightO className='mt-3 text-4xl text-blue-600' />
+</Link>
+
         </div>
         
 
@@ -50,7 +56,13 @@ const Theraphy = () => {
           </h1>
           <h1 className=' text-2xl lg:text-4xl font-semibold mb-3 mt-2.5'>Emotional regulation, <span className='text-blue-600 italic font font-playfair'>trauma,</span> <br /> borderline personality</h1>
           <p className='text-lg'>Focuses on mindfulness, distress tolerance, emotional control, and <br /> interpersonal effectiveness.</p>
-           <Link href={'/'}><CgArrowTopRightO className='mt-3 text-4xl text-blue-600' /></Link>
+           <Link href={{
+  pathname: '/theraphyDetails',
+  query: { type: 'b' } // Or 'dbt', 'act', etc.
+}}>
+  <CgArrowTopRightO className='mt-3 text-4xl text-blue-600' />
+</Link>
+
         </div>
       </div>
 
@@ -64,7 +76,13 @@ const Theraphy = () => {
           </h1>
           <h1 className=' text-2xl lg:text-4xl font-semibold mb-3'>Anxiety, depression, OCD, <span className='text-blue-600 italic font-semibold'>trauma,</span> <br /> life transitions</h1>
           <p className='text-lg'>ACT focuses on psychological flexibility: the ability to stay present and <br /> choose value-driven behavior in any situation.</p>
-          <Link href={'/'}><CgArrowTopRightO className='mt-3 text-4xl text-blue-600' /></Link>
+          <Link href={{
+  pathname: '/theraphyDetails',
+  query: { type: 'c' } // Or 'dbt', 'act', etc.
+}}>
+  <CgArrowTopRightO className='mt-3 text-4xl text-blue-600' />
+</Link>
+
         </div>
 
         <div>
