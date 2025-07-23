@@ -29,7 +29,7 @@ const Footer = () => {
         </div>
 
         <div>
-          <h1 className='text-primary font-bold'>Quick Links</h1>
+          <h1 className='text-[#0056F6] font-bold text-lg'>Quick Links</h1>
           <div className='flex flex-col'>
             <a href="#" className='text-white mb-2.5 mt-5'>Home</a>
             <a href="#" className='text-white mb-2.5'>About Us</a>
@@ -41,7 +41,7 @@ const Footer = () => {
 
 
         <div>
-          <h1 className='text-primary font-bold'>Contact Us</h1>
+          <h1 className='text-[#0056F6] font-bold text-lg'>Contact Us</h1>
           <div className='flex items-center text-white gap-1 mt-5 mb-2.5'>
             <div><IoMdCall /></div>
             <div>+1 (555) 123-4567</div>
@@ -60,11 +60,11 @@ const Footer = () => {
 
 
         <div>
-          <h1 className='text-primary font-bold'>Newsletter</h1>
+          <h1 className='text-[#0056F6] font-bold text-lg'>Newsletter</h1>
           <p className='text-white mt-5 mb-7'>Subscribe for travel updates and <br /> exclusive offers</p>
           <div className='flex'>
-            <input className='border-1 border-primary rounded-l-lg px-3' type="text" placeholder='Enter your email' />
-            <button className='bg-primary rounded-r-xm text-white px-4 py-2.5 rounded-r-lg'>Subscribe</button>
+            <input className='border-1 border-[#0056F6] text-white rounded-l-lg px-3' type="text" placeholder='Enter your email' />
+            <button className='bg-[#0056F6] rounded-r-xm text-white px-4 py-2.5 rounded-r-lg'>Subscribe</button>
           </div>
         </div>
 
