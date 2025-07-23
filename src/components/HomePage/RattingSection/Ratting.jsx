@@ -147,14 +147,14 @@ const Ratting = () => {
     <div className=" bg-black lg:px-16 px-5">
       <div className="flex justify-center pt-32">
         <div className="w-48 h-7 flex justify-center items-center">
-          <h1 className="text-primary border border-primary px-5 py-0.5 rounded-sm text-center">
+          <h1 className="border border-white px-5 py-0.5 rounded-sm text-center text-white text-xl">
             What People Say
           </h1>
         </div>
       </div>
-      <h1 className="text-center mt-7 text-4xl font-bold">
+      <h1 className="text-center mt-7 text-4xl font-bold text-white">
         Every session matters. Every story counts. <br /> Experience{" "}
-        <span className="text-primary italic font-playfair">safespace</span>{" "}
+        <span className="italic font-playfair text-[#0056F6]">safespace</span>{" "}
         impact.
       </h1>
       <div className="mt-16">
@@ -171,15 +171,14 @@ const Ratting = () => {
             <h1 className="font-bold text-xl mt-5 mb-3">Robert Fox</h1>
             {/*Star Icon*/}
             <div className="flex justify-center mb-3">
-              <MdOutlineStar className="text-xl text-primary" />
-              <MdOutlineStar className="text-xl text-primary" />
-              <MdOutlineStar className="text-xl text-primary" />
-              <MdOutlineStar className="text-xl text-primary" />
-              <MdOutlineStar className="text-xl text-primary" />
+              <MdOutlineStar className="text-xl text-blue-600" />
+              <MdOutlineStar className="text-xl text-blue-600" />
+              <MdOutlineStar className="text-xl text-blue-600" />
+              <MdOutlineStar className="text-xl text-blue-600" />
+              <MdOutlineStar className="text-xl text-blue-600" />
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur. Euismod sit et arcu amet
-              sed ultrices quam.
+              I never thought talking to an AI could actually help me feel heard. The 24/7 support helped me through some of my most anxious nights.
             </p>
           </div>
           <div className="lg:w-[424px] h-[267px] text-black py-11 px-6 border-1 border-[#76A6FF] rounded-xl text-center bg-[#76A6FF] transition duration-300 mb-2">
@@ -193,15 +192,14 @@ const Ratting = () => {
             <h1 className="font-bold text-xl mt-5 mb-3">Devon Lane</h1>
             {/*Star Icon*/}
             <div className="flex justify-center mb-3">
-              <MdOutlineStar className="text-xl text-primary" />
-              <MdOutlineStar className="text-xl text-primary" />
-              <MdOutlineStar className="text-xl text-primary" />
-              <MdOutlineStar className="text-xl text-primary" />
-              <MdOutlineStar className="text-xl text-primary" />
+              <MdOutlineStar className="text-xl text-blue-600" />
+              <MdOutlineStar className="text-xl text-blue-600" />
+              <MdOutlineStar className="text-xl text-blue-600" />
+              <MdOutlineStar className="text-xl text-blue-600" />
+              <MdOutlineStar className="text-xl text-blue-600" />
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur. Euismod sit et arcu amet
-              sed ultrices quam.
+              During a panic attack, I opened the app and used the voice chat. The AI guided me through calming exercises in real time. It truly felt life-saving
             </p>
           </div>
           <div className="lg:w-[424px] h-[267px] py-11 text-black px-6 border-1 border-[#76A6FF] rounded-xl text-center bg-[#76A6FF] transition duration-300">
@@ -214,16 +212,15 @@ const Ratting = () => {
             />
             <h1 className="font-bold text-xl mt-5 mb-3">Courtney Henry</h1>
             {/*Star Icon*/}
-            <div className="flex justify-center mb-3">
-              <MdOutlineStar className="text-xl text-primary" />
-              <MdOutlineStar className="text-xl text-primary" />
-              <MdOutlineStar className="text-xl text-primary" />
-              <MdOutlineStar className="text-xl text-primary" />
-              <MdOutlineStar className="text-xl text-primary" />
+            <div className="flex justify-center mb-3 text-blue-600">
+              <MdOutlineStar className="text-xl text-blue-600" />
+              <MdOutlineStar className="text-xl text-blue-600" />
+              <MdOutlineStar className="text-xl text-blue-600" />
+              <MdOutlineStar className="text-xl text-blue-600" />
+              <MdOutlineStar className="text-xl text-blue-600" />
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur. Euismod sit et arcu amet
-              sed ultrices quam.
+              This isn’t just a chatbot. It’s a space where I unpack years of emotional baggage without fear of judgment. The AI adapts to my pace and progress.
             </p>
           </div>
         </div>
@@ -232,12 +229,12 @@ const Ratting = () => {
       {/*Our Pricing Plans*/}
       <div id="pricing-section">
         <div className="flex justify-center mt-24">
-          <h1 className="text-white border border-white rounded-sm w-32 text-center">
+          <h1 className="text-white border border-white rounded-sm w-44 text-center text-xl">
             Our Pricing Plans
           </h1>
         </div>
-        <h1 className="text-center mt-7 text-4xl font-bold">
-          Accessible <span className="italic text-primary">therapy</span> for
+        <h1 className="text-center mt-7 text-4xl font-bold text-white">
+          Accessible <span className="font-playfair text-[#0056F6] italic">therapy</span> for
           every mind
         </h1>
 
@@ -325,7 +322,7 @@ const Ratting = () => {
                   </h1>
                   <button
                     onClick={() => handlePlanClick(plan.id)}
-                    className="flex justify-center text-white bg-primary cursor-pointer rounded mx-auto w-2/3 py-1.5"
+                    className="flex justify-center text-white bg-[#0056F6] cursor-pointer rounded mx-auto w-2/3 py-1.5"
                   >
                     Choose this plan
                   </button>
