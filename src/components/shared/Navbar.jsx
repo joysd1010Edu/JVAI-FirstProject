@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
+
 const Navbar = () => {
 
     const pathName = usePathname()
@@ -30,7 +31,7 @@ const Navbar = () => {
     return (
         <div >
             <div>
-                <div className="navbar bg-[#010C4A80] blur-[300] shadow-sm lg:px-16">
+                <div className="navbar sticky top-0 z-50 bg-[#081335] shadow-md text-white px-20 ">
                     <div className="navbar-start">
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -46,19 +47,19 @@ const Navbar = () => {
                                 }
                             </ul>
                         </div>
-                        <h3>Emothrive</h3>
+                        <Link href={'/'}><Image src='/logo.png' alt='website_logo' width={30} height={30}/></Link>
                     </div>
                     <div className="navbar-center hidden lg:flex ">
-                        <ul className="menu menu-horizontal gap-10 px-1 text-[20px]">
+                        <ul className="menu menu-horizontal gap-10 px-1 text-[20px] ">
                             {
                                 navItems?.map((navItem) => (
-                                    <Link className={` font-semibold ${pathName === navItem.path ? "text-[]" : ""}`} href={navItem.path} key={navItem.path}>{navItem.title}</Link>
+                                    <Link className={` font-semibold ${pathName === navItem.path ? "text-[#0056F6]" : ""}`} href={navItem.path} key={navItem.path}>{navItem.title}</Link>
                                 ))
                             }
                         </ul>
                     </div>
                     <div className="navbar-end">
-                        <Link href={'/chat'} className='btn bg-primary text-white rounded-[38px] py-[10px] px-[20px]'>Try Free AI Therapy</Link>
+                        <Link href={'/chat'} className='bg-[#0056F6] text-white rounded-[38px] py-[10px] px-[20px] outline-none'>Try Free AI Therapy</Link>
                     </div>
                 </div>
             </div>

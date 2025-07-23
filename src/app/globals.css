@@ -8,7 +8,7 @@
 @custom-variant dark (&:is(.dark *));
 
 .font-playfair {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Playfair Display', serif, 'Nunito';
 }
 
 /* React PDF Styles */
@@ -16,6 +16,8 @@
   max-width: 100%;
   height: auto !important;
 }
+
+
 
 .react-pdf__Document {
   display: flex;

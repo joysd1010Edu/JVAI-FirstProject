@@ -3,9 +3,9 @@ import React from "react";
 
 const MentalHealthHero = () => {
   return (
-    <div className=" bg-black">
+    <div className=" bg-black px-6">
       <marquee className="mt-[20px]">
-        <div className="flex gap-8 text-primary text-xl font-bold justify-center">
+        <div className="flex gap-8 text-[#0056F6] text-xl font-bold justify-center">
           <li>CHILD COUNSELLING</li>
           <li>FAMILY COUNSELLING</li>
           <li>INDIVIDUAL COUNSELLING</li>
