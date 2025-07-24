@@ -18,8 +18,8 @@ export const TaskHome = () => {
   const [breathingTimeLeft, setBreathingTimeLeft] = useState(300); // 5 minutes in seconds
   const [breathingProgress, setBreathingProgress] = useState(0);
   const [breathingCompleted, setBreathingCompleted] = useState(false);
-  const [breathingPhase, setBreathingPhase] = useState('inhale'); // 'inhale', 'hold', 'exhale'
-  const [breathingCycle, setBreathingCycle] = useState(0); // 0-11 seconds for each cycle
+  const [breathingPhase, setBreathingPhase] = useState('inhale'); 
+  const [breathingCycle, setBreathingCycle] = useState(0); 
 
   const axios = useAxios();
 
@@ -42,19 +42,11 @@ export const TaskHome = () => {
     }
   };
 
-  const fetchBreathingExercises = async () => {
-    try {
-      const response = await axios.get('/api/tasks/breathing/');
-      console.log('Breathing exercises:', response.data);
-      setBreathingExercises(response.data || []);
-    } catch (error) {
-      console.error('Error fetching breathing exercises:', error);
-    }
-  };
+ 
 
   const startBreathingExercise = () => {
     setIsBreathingActive(true);
-    setBreathingTimeLeft(300); 
+    setBreathingTimeLeft(300); // 5 minutes in seconds
     setBreathingProgress(0);
     setBreathingCompleted(false);
     setBreathingPhase('inhale');
@@ -68,28 +60,24 @@ export const TaskHome = () => {
         completed: true
       });
       console.log('Breathing exercise completed:', response.data);
+      
+      // Set completion states
       setBreathingCompleted(true);
-      setIsBreathingActive(false);
-     
+      // setIsBreathingActive(false);
+      
+      // Increment task count
       setTaskCount((prevCount) => prevCount + 1);
     } catch (error) {
       console.error('Error completing breathing exercise:', error);
+      // Still mark as completed locally even if API fails
+      setBreathingCompleted(true);
+      // setIsBreathingActive(false);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const autoCompleteBreathingExercise = async () => {
-    try {
-      const response = await axios.post('/api/tasks/breathing-exercises/complete/', {
-        completed: true
-      });
-      console.log('Breathing exercise auto-completed:', response.data);
-      setTaskCount((prevCount) => prevCount + 1);
-    } catch (error) {
-      console.error('Error auto-completing breathing exercise:', error);
-    }
-  };
+
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -143,14 +131,11 @@ export const TaskHome = () => {
       interval = setInterval(() => {
         setBreathingTimeLeft((prev) => {
           const newTime = prev - 1;
-          const progress = ((300 - newTime) / 300) * 100;
+          const progress = ((300 - newTime) / 300) * 100; // Updated for 300 seconds
           setBreathingProgress(progress);
           
-          // Don't auto-complete - let user manually complete
-          if (newTime === 0) {
-            setIsBreathingActive(false);
-            // Don't set completed automatically
-          }
+          
+
           
           return newTime;
         });
@@ -245,7 +230,7 @@ export const TaskHome = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-white mb-4">Breathing Exercise</h3>
             <div className="bg-[#1a1f2e] p-6 rounded-lg text-center">
-              {!isBreathingActive && !breathingCompleted ? (
+              {!isBreathingActive  ? (
                 <>
                   <div className="mb-6">
                     <div className="w-32 h-32 mx-auto bg-blue-500/20 rounded-full flex items-center justify-center mb-4 relative">
@@ -261,7 +246,7 @@ export const TaskHome = () => {
                     Start Breathing Exercise
                   </button>
                 </>
-              ) : isBreathingActive ? (
+              ) : !breathingCompleted ? (
                 <>
                   <div className="mb-6">
                     <div className="w-32 h-32 mx-auto relative mb-4">
@@ -332,7 +317,7 @@ export const TaskHome = () => {
                     <div className="flex gap-3 justify-center">
                       <button 
                         onClick={completeBreathingExercise}
-                        disabled={isSubmitting}
+                        disabled={ breathingTimeLeft > 0}
                         className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Complete Task
@@ -347,7 +332,7 @@ export const TaskHome = () => {
                     </div>
                   )}
                 </>
-              ) : breathingCompleted ? (
+              ) : (
                 <>
                   <div className="mb-6">
                     <div className="text-6xl mb-4 animate-bounce">🎉</div>
@@ -364,13 +349,17 @@ export const TaskHome = () => {
                     </div>
                   </div>
                   <button 
-                    onClick={startBreathingExercise}
+                    onClick={() => {
+                      setBreathingCompleted(false);
+                      
+                      startBreathingExercise();
+                    }}
                     className="bg-[#0059FF] text-white px-6 py-2 rounded hover:bg-blue-600 transition-colors"
                   >
                     Start Another Session
                   </button>
                 </>
-              ) : null}
+              ) }
             </div>
           </div>
         );
