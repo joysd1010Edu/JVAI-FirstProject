@@ -2,6 +2,8 @@ import Image from 'next/image'
 import React from 'react'
 import { MdOutlineStar } from "react-icons/md";
 
+
+
 const About_Us = () => {
   return (
     <div className='bg-black px-4 lg:px-0'>
