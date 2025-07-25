@@ -12,6 +12,11 @@ const MentalHealthHero = () => {
           <li>CHILD COUNSELLING</li>
           <li>COUPLE COUNSELLING</li>
           <li>FAMILY COUNSELLING</li>
+          <li>CHILD COUNSELLING</li>
+           <li>INDIVIDUAL COUNSELLING</li>
+            <li>CHILD COUNSELLING</li>
+              <li>COUPLE COUNSELLING</li>
+         
         </div>
       </marquee>
       <hr className="bg-blue-600 h-[1px] border-none mt-4" />

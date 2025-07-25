@@ -22,7 +22,7 @@ const CommonStruggles = () => {
           </h1>
           <h1 className=' text-2xl lg:text-4xl font-semibold mb-3'>Feeling alone, even when you're not? We <span className='text-blue-600 italic'>understand</span></h1>
           <p className='text-lg'>Helps you recognize and reframe unhelpful thoughts and behaviors through <br /> structured tools and real-time AI support</p>
-            <Link href={{ pathname: '/theraphyDetails', query: { type: 'd' } }}>
+            <Link href={{ pathname: '/commonDetails', query: { type: 'd' } }}>
               <CgArrowTopRightO className='mt-3 text-4xl text-blue-600' />
             </Link>
         </div>
@@ -53,7 +53,7 @@ const CommonStruggles = () => {
           </h1>
           <h1 className=' text-2xl lg:text-4xl font-semibold mb-3 mt-2.5'>Words hurt. Silence hurts more. You <br /> don’t have to face it <span className='text-blue-600 italic'>alone.</span></h1>
           <p className='text-lg'>Bullying leaves emotional scars  whether it happens at school, work, online, <br /> or even at home.</p>
-           <Link href={{ pathname: '/theraphyDetails', query: { type: 'e' } }}>
+           <Link href={{ pathname: '/commonDetails', query: { type: 'e' } }}>
               <CgArrowTopRightO className='mt-3 text-4xl text-blue-600' />
             </Link>
         </div>
@@ -69,7 +69,7 @@ const CommonStruggles = () => {
           </h1>
           <h1 className=' text-2xl lg:text-4xl font-semibold mb-3'>Every step counts and you <span className='italic text-blue-600'>don’t</span> have to take it alone.</h1>
           <p className='text-lg'>Struggling with alcohol use or walking the path of recovery can feel overwhelming, isolating, and filled with setbacks.</p>
-           <Link href={{ pathname: '/theraphyDetails', query: { type: 'f' } }}>
+           <Link href={{ pathname: '/commonDetails', query: { type: 'f' } }}>
               <CgArrowTopRightO className='mt-3 text-4xl text-blue-600' />
             </Link>
         </div>
@@ -101,7 +101,7 @@ const CommonStruggles = () => {
           </h1>
           <h1 className=' text-2xl lg:text-4xl font-semibold mb-3 mt-2.5'>When everything feels like too much <br />  it’s time to find your <span className='italic text-blue-600'>balance.</span></h1>
           <p className='text-lg'>Long hours, endless to-do lists, and constant pressure can take a toll on <br /> your mental health. If you're feeling burned out, distracted.</p>
-           <Link href={{ pathname: '/theraphyDetails', query: { type: 'g' } }}>
+           <Link href={{ pathname: '/commonDetails', query: { type: 'g' } }}>
               <CgArrowTopRightO className='mt-3 text-4xl text-blue-600' />
             </Link>
         </div>
@@ -117,7 +117,7 @@ const CommonStruggles = () => {
           </h1>
           <h1 className=' text-2xl lg:text-4xl font-semibold mb-3'>Every relationship has its <span className='text-blue-600 italic'>challenges</span> <br /> let’s work through them together.</h1>
           <p className='text-lg'>Whether it's tension with a partner, misunderstandings with friends, or <br /> family stress that never seems to ease, relationship struggles can leave you <br /> emotionally drained and confused.</p>
-           <Link href={{ pathname: '/theraphyDetails', query: { type: 'h' } }}>
+           <Link href={{ pathname: '/commonDetails', query: { type: 'h' } }}>
               <CgArrowTopRightO className='mt-3 text-4xl text-blue-600' />
             </Link>
         </div>
@@ -147,7 +147,7 @@ const CommonStruggles = () => {
           </h1>
           <h1 className=' text-2xl lg:text-4xl font-semibold mb-3 mt-2.5'>Stuck, overwhelmed, or <span className='text-blue-600 italic'>always</span> <br /> running out of time.</h1>
           <p className='text-lg'>Procrastination often hides deeper issues like anxiety, perfectionism, or <br /> burnout. Infiheal helps you uncover what’s really going on.</p>
-           <Link href={{ pathname: '/theraphyDetails', query: { type: 'i' } }}>
+           <Link href={{ pathname: '/commonDetails', query: { type: 'i' } }}>
               <CgArrowTopRightO className='mt-3 text-4xl text-blue-600' />
             </Link>
         </div>
@@ -163,7 +163,7 @@ const CommonStruggles = () => {
           </h1>
           <h1 className=' text-2xl lg:text-4xl font-semibold mb-3'>You are enough even if it <span className='text-blue-600 italic'>doesn’t</span> feel <br /> that way right now.</h1>
           <p className='text-lg'>Low self-esteem can make everyday decisions feel heavy, relationships feel insecure, and life feel <br /> like it’s happening without you.</p>
-           <Link href={{ pathname: '/theraphyDetails', query: { type: 'j' } }}>
+           <Link href={{ pathname: '/commonDetails', query: { type: 'j' } }}>
               <CgArrowTopRightO className='mt-3 text-4xl text-blue-600' />
             </Link>
         </div>
@@ -193,7 +193,7 @@ const CommonStruggles = () => {
           </h1>
           <h1 className=' text-2xl lg:text-4xl font-semibold mb-3 mt-2.5'>Sometimes, it’s just... everything.</h1>
           <p className='text-lg'>You might not have a specific diagnosis. Maybe it’s not one big issue just <br /> stress, confusion, or feeling stuck.</p>
-           <Link href={{ pathname: '/theraphyDetails', query: { type: 'k' } }}>
+           <Link href={{ pathname: '/commonDetails', query: { type: 'k' } }}>
               <CgArrowTopRightO className='mt-3 text-4xl text-blue-600' />
             </Link>
         </div>
