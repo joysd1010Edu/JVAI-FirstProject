@@ -30,11 +30,10 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex h-screen overflow-hidden">
-          
+        <div className="flex min-h-screen flex-col lg:flex-row">
           <Nav />  
-          <div className="flex-1 main-content transition-all lg:ml-[250px] duration-300" >
-            <div  className="min-h-[100vh] lg:px-52 bg-[radial-gradient(circle_at_center,_#0a1f44_0%,_#000814_100%)] border-1 border-blue-950">
+          <div className="flex-1 main-content transition-all lg:ml-[100px] duration-300" >
+            <div  className="min-h-[100vh] lg:px-38 bg-[radial-gradient(circle_at_center,_#0a1f44_0%,_#000814_100%)] border-1 border-blue-950">
               {children}
             </div>
           </div>

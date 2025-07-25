@@ -15,7 +15,7 @@ const Nav = () => {
     <>
       <DesktopNav />
 
-      <div className=" block lg:hidden   ">
+      <div className=" block lg:hidden ">
 
         <div className=" flex py-2 items-center justify-between px-4 w-screen bg-gradient-to-br from-[#0129F4] to-[#00062780] ">
           <RiMenu4Line onClick={toggleOpen} size={24}/>
