@@ -14,9 +14,7 @@ export const TaskHome = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasSubmittedToday, setHasSubmittedToday] = useState(false);
 
-
   // left column data states
-  
 
   // Breathing exercise states
   const [breathingExercises, setBreathingExercises] = useState([]);
@@ -30,7 +28,7 @@ export const TaskHome = () => {
   // Progress tracking states
 
   const [completedTasks, setCompletedTasks] = useState(0);
- 
+
   const [streak, setStreak] = useState({});
   const [totalGratitudeEntries, setTotalGratitudeEntries] = useState(0);
   const [totalBreathingSessions, setTotalBreathingSessions] = useState(0);
@@ -40,62 +38,71 @@ export const TaskHome = () => {
   const fetchStreakData = async () => {
     const response = await axios.get("/api/tasks/total-daily-tasks/");
     console.log("Streak data:", response.data);
-    const today=new Date().toLocaleDateString('en-CA');
+    const today = new Date().toLocaleDateString("en-CA");
     // const today=new Date().toISOString().split('T')[0]
-    const todayEntry = response.data.find(entry => {
-      const entryDate = new Date(entry.date).toISOString().split('T')[0];
+    const todayEntry = response.data.find((entry) => {
+      const entryDate = new Date(entry.date).toISOString().split("T")[0];
       return entryDate === today;
     });
     console.log("Today's entry:", todayEntry);
     if (todayEntry) {
-      let completed=0
-      if(todayEntry.gratitude_completed) completed+=1;
-      if(todayEntry.breathing_completed) completed+=1;
-      if(todayEntry.affirmation_completed) completed+=1;
+      let completed = 0;
+      if (todayEntry.gratitude_completed) completed += 1;
+      if (todayEntry.breathing_completed) completed += 1;
+      if (todayEntry.affirmation_completed) completed += 1;
       console.log("Today's completed tasks:", completed);
       setCompletedTasks(completed);
     }
-  const sortedData = [...response.data].sort((a, b) => new Date(a.date) - new Date(b.date));
-  // Ensure latest7 always has 7 items (pad with empty objects if needed)
-  let latest7 = sortedData.slice(-7);
-  if (latest7.length < 7) {
-    const padCount = 7 - latest7.length;
-    // Generate unique ids for empty objects using timestamp + index
-    const emptyEntries = Array.from({ length: padCount }, (_, i) => ({
-      __empty: true,
-      id: `empty-${Date.now()}-${i}`
-    }));
-    latest7 = emptyEntries.concat(latest7);
-  }
-  const streakArray = [];
-  latest7.forEach((entry, idx) => {
-    if (!entry || Object.keys(entry).length === 0 || entry.__empty) {
-      streakArray.push({ complete: false, id: entry?.id || `empty-${Date.now()}-${idx}` });
-    } else {
-      const { gratitude_completed, breathing_completed, affirmation_completed } = entry;
-      streakArray.push({
-        complete: !!gratitude_completed && !!breathing_completed && !!affirmation_completed,
-        id: entry.id
-      });
+    const sortedData = [...response.data].sort(
+      (a, b) => new Date(a.date) - new Date(b.date)
+    );
+    // Ensure latest7 always has 7 items (pad with empty objects if needed)
+    let latest7 = sortedData.slice(-7);
+    if (latest7.length < 7) {
+      const padCount = 7 - latest7.length;
+      // Generate unique ids for empty objects using timestamp + index
+      const emptyEntries = Array.from({ length: padCount }, (_, i) => ({
+        __empty: true,
+        id: `empty-${Date.now()}-${i}`,
+      }));
+      latest7 = emptyEntries.concat(latest7);
     }
-  });
-  setStreak(streakArray);
+    const streakArray = [];
+    latest7.forEach((entry, idx) => {
+      if (!entry || Object.keys(entry).length === 0 || entry.__empty) {
+        streakArray.push({
+          complete: false,
+          id: entry?.id || `empty-${Date.now()}-${idx}`,
+        });
+      } else {
+        const {
+          gratitude_completed,
+          breathing_completed,
+          affirmation_completed,
+        } = entry;
+        streakArray.push({
+          complete:
+            !!gratitude_completed &&
+            !!breathing_completed &&
+            !!affirmation_completed,
+          id: entry.id,
+        });
+      }
+    });
+    setStreak(streakArray);
 
-  
-  response.data.forEach(entry => {
-    
-    if (entry.gratitude_completed) {setTotalGratitudeEntries(totalGratitudeEntries + 1);console.log("totalGratitudeEntries", totalGratitudeEntries)}
-    if (entry.affirmation_completed) setTotalAffirmationEntries(totalaffirmationEntries + 1);
-    setTotalBreathingSessions(totalBreathingSessions + entry.breathing_exercise_count);
-  })
-
-
-
-
-   
-
+    response.data.forEach((entry) => {
+      if (entry.gratitude_completed) {
+        setTotalGratitudeEntries(totalGratitudeEntries + 1);
+        console.log("totalGratitudeEntries", totalGratitudeEntries);
+      }
+      if (entry.affirmation_completed)
+        setTotalAffirmationEntries(totalaffirmationEntries + 1);
+      setTotalBreathingSessions(
+        totalBreathingSessions + entry.breathing_exercise_count
+      );
+    });
   };
-
 
   const fetchGratitudeEntries = async () => {
     setIsLoading(true);
@@ -106,20 +113,22 @@ export const TaskHome = () => {
       // Fix date comparison - use proper date format
       const today = new Date();
       // console.log("today" ,today)
-const localToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-const todayString = new Date().toLocaleDateString('en-CA');
-      
+      const localToday = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate()
+      );
+      const todayString = new Date().toLocaleDateString("en-CA");
+
       const todayEntry = response.data?.find((entry) => {
         // console.log("entry", entry)
-        const entryDate = new Date(entry.date).toISOString().split('T')[0];
+        const entryDate = new Date(entry.date).toISOString().split("T")[0];
         return entryDate === todayString;
       });
-      
-      
+
       if (todayEntry) {
         setHasSubmittedToday(true);
       }
-      
     } catch (error) {
       console.error("Error fetching gratitude entries:", error);
     } finally {
@@ -135,7 +144,7 @@ const todayString = new Date().toLocaleDateString('en-CA');
     setBreathingPhase("inhale");
     setBreathingCycle(0);
   };
-// ---------------------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------
   const completeBreathingExercise = async () => {
     setIsSubmitting(true);
     try {
@@ -149,8 +158,7 @@ const todayString = new Date().toLocaleDateString('en-CA');
 
       // Set completion states
       setBreathingCompleted(true);
-     
-      setTaskCount((prevCount) => prevCount + 1);
+      fetchStreakData();
     } catch (error) {
       console.error("Error completing breathing exercise:", error);
       // Still mark as completed locally even if API fails
@@ -158,6 +166,7 @@ const todayString = new Date().toLocaleDateString('en-CA');
       // setIsBreathingActive(false);
     } finally {
       setIsSubmitting(false);
+      fetchStreakData();
     }
   };
 
@@ -192,13 +201,13 @@ const todayString = new Date().toLocaleDateString('en-CA');
       setGratitudeText("");
       setHasSubmittedToday(true);
 
-
       await fetchGratitudeEntries();
-      setTaskCount((prevCount) => prevCount + 1);
+      fetchStreakData();
     } catch (error) {
       console.error("Error saving gratitude entry:", error);
     } finally {
       setIsSubmitting(false);
+      fetchStreakData();
     }
   };
 
@@ -294,6 +303,7 @@ const todayString = new Date().toLocaleDateString('en-CA');
 
       setTaskCount((prevCount) => prevCount + 1);
       setAffirmationCompleted(false);
+      fetchStreakData();
       Swal.fire({
         icon: "success",
         title: "Affirmation Completed!",
@@ -305,14 +315,13 @@ const todayString = new Date().toLocaleDateString('en-CA');
     } finally {
       setIsSubmittingAffirmation(false);
       setAffirmationCompleted(false);
+      fetchStreakData();
     }
   };
 
   useEffect(() => {
     fetchaffirmation();
   }, [affirmationCompleted]);
-
-
 
   const renderContent = () => {
     switch (activeTab) {
@@ -722,7 +731,9 @@ const todayString = new Date().toLocaleDateString('en-CA');
                 <div className="bg-[#1a1f2e] p-4 rounded">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-gray-300">Today's Tasks</span>
-                    <span className="text-blue-400 font-bold">{completedTasks||0}/3</span>
+                    <span className="text-blue-400 font-bold">
+                      {completedTasks || 0}/3
+                    </span>
                   </div>
                   <div className="w-full bg-gray-700 rounded-full h-2">
                     <div
@@ -734,36 +745,51 @@ const todayString = new Date().toLocaleDateString('en-CA');
 
                 <div className="bg-[#1a1f2e] p-4 rounded">
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-green-400 font-bold">Weekly Streak</span>
+                    <span className="text-green-400 font-bold">
+                      Weekly Streak
+                    </span>
                   </div>
                   <div className="flex gap-1">
-                     {streak.length > 0 && streak.map((day) => (
-                      <div
-                        key={day.id}
-                        className={`w-6 h-6 rounded ${
-                          day.complete ? "bg-green-500" : "bg-gray-600"
-                        }`}
-                      ></div>
-                    ))}
+                    {streak.length > 0 &&
+                      streak.map((day) => (
+                        <div
+                          key={day.id}
+                          className={`w-6 h-6 rounded ${
+                            day.complete ? "bg-green-500" : "bg-gray-600"
+                          }`}
+                        ></div>
+                      ))}
                   </div>
                 </div>
 
                 <div className="bg-[#1a1f2e] p-4 rounded">
-                  <h4 className="text-white font-medium mb-2">Quick daily Stats</h4>
+                  <h4 className="text-white font-medium mb-2">
+                    Quick daily Stats
+                  </h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span className="text-gray-400">Gratitude entries</span>
-                      <span className="text-white">{totalGratitudeEntries}</span>
+                      <span className="text-white">
+                        {totalGratitudeEntries}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-400">Breathing sessions</span>
-                      <span className="text-white">{totalBreathingSessions}</span>{console.log("totalBreathingSessions", totalBreathingSessions)}
+                      <span className="text-white">
+                        {totalBreathingSessions}
+                      </span>
+                      {console.log(
+                        "totalBreathingSessions",
+                        totalBreathingSessions
+                      )}
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-400">
                         Affirmations practiced
                       </span>
-                      <span className="text-white">{totalaffirmationEntries}</span>
+                      <span className="text-white">
+                        {totalaffirmationEntries}
+                      </span>
                     </div>
                   </div>
                 </div>
