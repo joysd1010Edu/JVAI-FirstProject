@@ -13,15 +13,24 @@ const axiosInstance = axios.create({
   withCredentials: false, 
 });
 
-
 axiosInstance.interceptors.request.use(
   (config) => {
     
     const token = typeof window !== 'undefined' ? localStorage.getItem('access') : null;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+      
     }
     
+    // Add current local time to every request
+    if (typeof window !== 'undefined') {
+      const localTime = new Date().toLocaleDateString();
+      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      
+      // Send time data as headers to the backend
+      config.headers['X-Local-Time'] = localTime;
+      config.headers['X-Timezone'] = userTimezone;
+    }
     
     if (config.url && !config.url.startsWith('http') && config.url.startsWith('/api')) {
       
