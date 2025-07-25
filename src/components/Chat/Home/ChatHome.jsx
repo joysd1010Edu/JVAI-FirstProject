@@ -48,12 +48,12 @@ const ChatHome = () => {
         </p>
         <div className="relative w-full">
   <Input
-    className="py-8 pr-20 bg-[#FFFFFF33] w-full"
-    type="email"
+    className="py-8 pr-20 bg-[#FFFFFF33] w-[950px]"
+    type="text"
     placeholder="Start typing here..."
   />
   <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-4 text-2xl text-gray-800">
-    <MdOutlineKeyboardVoice className="cursor-pointer text-white" />
+    {/* <MdOutlineKeyboardVoice className="cursor-pointer text-white" /> */}
     <MdArrowUpward className="bg-gray-400 text-white rounded-sm p-1 cursor-pointer" />
   </div>
 </div>
