@@ -14,6 +14,7 @@ const MentalHealthHero = () => {
           <li>FAMILY COUNSELLING</li>
         </div>
       </marquee>
+      <hr className="bg-blue-600 h-[1px] border-none mt-4" />
       <div className="flex justify-center mt-24">
         <h1 className="text-white border border-white rounded-sm w-32 text-center">
           How We Work
