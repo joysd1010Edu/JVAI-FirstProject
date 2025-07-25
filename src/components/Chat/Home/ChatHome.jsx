@@ -13,9 +13,7 @@ const ChatHome = () => {
            
             <Dialog>
         <DialogTrigger asChild>
-          <Button className='rounded-full bg-black'>
           <Image className='rounded-full cursor-pointer ' src={"/avater.png"} alt='Profile_Image' width={50} height={50}/>
-          </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[1075px] h-[550px] overflow-y-auto bg-blue-950 [&>button]:text-white">
           <DialogHeader>
