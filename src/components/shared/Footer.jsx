@@ -21,7 +21,7 @@ const Footer = () => {
 
            <Link href={'/'}><Image src='/logo.png' alt='website_logo' width={30} height={30}/></Link>
           <p className='text-white mt-7'>Crafting mindful experiences with <br /> intelligent therapy. Your journey <br /> matters.</p>
-          <div className='flex gap-2 text-2xl text-primary mt-7 '>
+          <div className='flex gap-2 text-2xl text-white mt-7 '>
             <FaFacebook />
             <FaYoutube />
             <FaInstagramSquare />

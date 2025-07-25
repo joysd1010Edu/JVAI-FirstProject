@@ -4,11 +4,11 @@ import { MdOutlineStar } from "react-icons/md";
 
 const About_Us = () => {
   return (
-    <div className='bg-black'>
+    <div className='bg-black px-4 lg:px-0'>
       <div style={{
         background: 'radial-gradient(circle at center, #0B3B91 0%, #0A1A4F 50%, #000008 100%)',
       }} className='h-[532px] mx-auto'>
-        <p className='lg:py-14 text-[60px] text-center font-serif font-bold text-white'>Mental Health,<span className='text-[#0056F6] italic font-playfair'> Reimagined</span><br />
+        <p className='lg:py-14 text-2xl lg:pt-0 pt-8 lg:text-[60px] text-center font-serif font-bold text-white'>Mental Health,<span className='text-[#0056F6] italic font-playfair'> Reimagined</span><br />
           Through AI</p>
         <p className=' text-center text-white text-2xl'>
           We believe that everyone deserves access to mental wellness anytime, anywhere. <br /> Our platform combines the power of advanced AI with proven therapeutic techniques <br /> to create a safe, supportive, and affordable space for healing.

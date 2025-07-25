@@ -5,7 +5,7 @@ import { CgArrowTopRightO } from "react-icons/cg";
 
 const Theraphy = () => {
   return (
-    <div className='pb-10 bg-black text-white'>
+    <div className='pb-10 bg-black text-white px-4 lg:px-0'>
       {/*Section-2*/}
       <div style={{
         background: 'radial-gradient(circle at center, #0129F470 5%, rgba(1, 12, 74, 0.20) 50%, #010C4A33 70%)',

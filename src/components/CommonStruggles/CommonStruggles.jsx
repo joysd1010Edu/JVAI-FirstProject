@@ -6,7 +6,7 @@ import { CgArrowTopRightO } from 'react-icons/cg'
 const CommonStruggles = () => {
   return (
     <div>
-         <div className='pb-10 bg-black text-white'>
+         <div className='pb-10 bg-black text-white lg:px-0 px-4'>
       {/*Section-2*/}
       <div style={{
         background: 'radial-gradient(circle at center, #0129F470 5%, rgba(1, 12, 74, 0.20) 50%, #010C4A33 70%)',
