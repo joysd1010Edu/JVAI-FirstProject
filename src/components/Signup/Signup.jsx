@@ -267,7 +267,7 @@ const Signup = () => {
                 {loading ? "Creating Account..." : "Sign up"}
               </button>
 
-              <div className="flex items-center gap-3 justify-center"> <p className=" text-white font-normal">Already have an account ?</p> <Link href={'/login'} className=" text-primary"> Sign in</Link> </div>
+              <div className="flex items-center gap-3 justify-center"><p className=" text-white font-normal">Already have an account?<Link href={'/login'} className=" text-blue-600 font-bold"> Sign In</Link></p></div>
             
               <h3 className="text-center mb-5 text-[#EEEEEE]">
                 or continue with

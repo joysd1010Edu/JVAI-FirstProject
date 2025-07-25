@@ -200,15 +200,16 @@ const Login = () => {
               >
                 {loading ? "Signing in..." : "Sign in"}
               </button>
-              <div className="flex items-center gap-3 justify-center"> <p className=" text-white font-normal">Don't have an account ?</p> <Link href={'/signup'} className=" text-primary"> Create an account</Link> </div>
+              <div className="flex items-center gap-3 justify-center"> <p className=" text-white font-normal">Don't have an account? <Link href={'/signup'} className=" text-blue-600 font-bold">Sign Up</Link></p></div>
               <h3 className="text-center mb-5 text-[#EEEEEE]">
                 or continue with
               </h3>
+              
             </form>
             {/* use this for front end authentication */}
               {/* <GoogleSign /> */}
             {/* use this for back end authentication */}
-                <GoogleBtnBackend/>
+            <GoogleBtnBackend />
           </div>
         </div>
       </div>

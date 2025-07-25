@@ -5,6 +5,7 @@ import Footer from "@/components/shared/Footer";
 import { AxiosProvider } from "@/providers/AxiosProvider";
 import AuthProvider from "@/providers/AuthProvider";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import ClientLayout from "@/ClientLayout/ClientLayout";
 
 
 const playfair = Playfair_Display({
@@ -57,9 +58,11 @@ export default function RootLayout({ children }) {
         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
           <AuthProvider>
             <AxiosProvider>
-              <Navbar/>
-              {children}
-              <Footer/>
+              {/* <Navbar/> */}
+              <ClientLayout>
+                {children}
+              </ClientLayout>
+              {/* <Footer/> */}
             </AxiosProvider>
           </AuthProvider>
         </GoogleOAuthProvider>

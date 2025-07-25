@@ -60,7 +60,9 @@ export const GoogleBtnBackend = () => {
         backgroundColor: '#fff',
         display: 'flex',
         alignItems: 'center',
-        gap: '10px'
+        gap: '10px',
+        width: '386px',
+        justifyContent: 'center'
       }}
     >
       <img
