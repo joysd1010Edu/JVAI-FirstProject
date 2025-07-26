@@ -183,6 +183,7 @@ const DesktopNav = () => {
               {!isCollapsed && <h1>Resources</h1>}
             </Link>
           </nav>
+
           <nav id="searchNav" className={`${!isCollapsed ? "pt-10" : " hidden"} pb-32 max-h-[400px] overflow-y-auto`}>
             <h1 className=" text-[16px] font-semibold px-3 ">Chats History</h1>
             <form

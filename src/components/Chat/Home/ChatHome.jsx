@@ -48,7 +48,7 @@ const ChatHome = () => {
         </p>
         <div className="relative w-full">
   <Input
-    className="py-8 pr-20 bg-[#FFFFFF33] w-[950px]"
+    className="py-8 pr-20 bg-[#FFFFFF33] w-[950px] border-none"
     type="text"
     placeholder="Start typing here..."
   />
