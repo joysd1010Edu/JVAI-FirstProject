@@ -8,9 +8,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        nunito: ['var(--font-nunito)', 'sans-serif'],
+        lemon: ['var(--font-lemon)'],
+        nunito: ['var(--font-nunito)'],
         montserrat: ['Montserrat', 'sans-serif'],
-        lemon: ['Lemon', 'cursive'],
       },
       colors: {
         primary: "#0056F6",

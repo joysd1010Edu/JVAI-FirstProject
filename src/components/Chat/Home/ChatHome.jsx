@@ -153,15 +153,15 @@ const ChatHome = () => {
               : "opacity-100 pointer-events-auto transform translate-y-0"
           }`}
         >
-          <div className="text-center text-white">
+          <div className="text-center  text-white">
             <div id="welcome-message">
-              <h1 className="text-3xl font-bold text-[#0059FF]">
+              <h1 style={{fontFamily:"kalam, sans-serif"}} className="md:text-[50px] text-3xl font-bold text-[#0059FF]">
                 Emothrive Your AI Therapist
               </h1>
-              <p className="mt-4 text-[#F9F9F9] mb-6 text-2xl">
+              <p style={{fontFamily:"nunito, sans-serif"}} className="mt-4 text-[#F9F9F9] mb-6 text-lg md:text-2xl">
                 I'm Emothrive, your AI Guide to Better Mental Health.
                 <br />
-                <span className="text-[#C5C5C5] text-xl">
+                <span className="text-[#949292] text-lg md:text-xl">
                   What do you want to talk about?
                 </span>
               </p>

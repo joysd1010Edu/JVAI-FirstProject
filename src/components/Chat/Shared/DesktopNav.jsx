@@ -72,7 +72,7 @@ console.log(subscription, "subscription in desktop nav");
         <div className="px-4 py-4">
           {!isCollapsed ? (
             <div className=" flex justify-between items-center">
-              <h1 className="text-xl font-lemon">Emothrive Therapy</h1>
+              <h1 style={{fontFamily:"lemon, cursive"}} className="text-md font-lemon">Emothrive Therapy</h1>
               <button
                 onClick={toggleNav}
                 className={`p-2 rounded-md group hover:bg-white hover:text-[#0056F6] transition-all`}
@@ -84,7 +84,7 @@ console.log(subscription, "subscription in desktop nav");
             <div className="flex justify-center">
               <button
                 onClick={toggleNav}
-                className="w-10 h-10 flex items-center justify-center rounded-md text-xl bg-white text-[#0056F6] transition-colors font-bold"
+                className="w-10 h-10 flex items-center justify-center rounded-md text-xl text-[#0056F6] transition-colors font-bold"
               >
                 <Image
                   src="/logo.png"
@@ -97,7 +97,7 @@ console.log(subscription, "subscription in desktop nav");
           )}
         </div>
         {/* Navigation Content */}
-        <div className={`${isCollapsed ? "px-2" : "px-5"} py-2`}>
+        <div style={{fontFamily:"nunito, sans-serif"}} className={`${isCollapsed ? "px-2" : "px-5"} py-2`}>
           <nav id="mainNav" className="space-y-2 flex flex-col gap-3">
             <Link
               href={"/chat"}

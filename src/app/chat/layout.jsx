@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
                 <ProfileDialog />
               </div>
               <div className=" relative min-h-screen bg-black overflow-hidden">
-                <div className="absolute top-[-100px] right-[-150px] w-[700px] h-[500px] bg-[#0056F6]/15 rounded-[50%] blur-[120px] pointer-events-none z-0"></div>
+                <div className="absolute top-[-100px] -rotate-30 right-[-150px] w-[1200px] h-[800px] bg-[#0056F6]/20 rounded-[50%] blur-[120px] pointer-events-none z-0"></div>
                 {children}
               </div>
             </div>

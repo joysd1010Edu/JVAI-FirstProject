@@ -109,7 +109,7 @@ export const History = () => {
       {historyData.length > 0 ? (
         <div className="space-y-3">
           {historyData.map((session) => (
-            <div
+            <div style={{fontFamily:"nunito, sans-serif"}}
               key={session.id}
               className="px-5 py-2.5 text-white bg-[#272f3c] rounded-lg flex justify-between items-center ease-in-out hover:bg-[#07378f] duration-300 transition-colors"
             >

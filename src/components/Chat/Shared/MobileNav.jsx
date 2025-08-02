@@ -73,7 +73,7 @@ const MobileNav = ({ isOpened, toggleOpen }) => {
       >
         <div className="px-4 py-4">
           <div className=" flex justify-between items-center">
-              <h1 className="text-xl font-lemon" >
+              <h1 style={{fontFamily:"lemon, cursive"}} className="text-md font-lemon" >
                 Emothrive Therapy
               </h1>
               <button
@@ -85,7 +85,7 @@ const MobileNav = ({ isOpened, toggleOpen }) => {
             </div>
         </div>
         {/* Navigation Content */}
-        <div className={`px-5 py-2`}>
+        <div style={{fontFamily:"nunito, sans-serif"}} className={`px-5 py-2`}>
           <nav id="mainNav" className="space-y-2 flex flex-col gap-1">
             <Link
               href={"/chat"}

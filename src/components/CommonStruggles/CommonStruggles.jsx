@@ -9,13 +9,13 @@ const CommonStruggles = () => {
          <div className='lg:pb-10  bg-black text-white lg:px-0 px-4'>
       {/*Section-2*/}
       <div style={{
-        background: 'radial-gradient(circle at center, #0129F470 5%, rgba(1, 12, 74, 0.20) 50%, #010C4A33 70%)',
+        background: 'radial-gradient(circle at center, #0B3B91 0%, #0A1A4F 50%, #000008 100%)',
       }} className='lg:h-[532px] py-5 lg:py-0 flex justify-center items-center text-center px-4'>
         <p className='lg:py-14 text-2xl lg:text-[66px] font-serif font-bold'>You’re Not Alone and You Don’t Have <br /> to Face it <span className='italic text-blue-600'>Alone</span>.</p>
       </div>
 
       {/*Section-3*/}
-      <div className='lg:flex gap-28 mt-28 justify-center'>
+      <div className='lg:flex gap-28 mt-28 justify-center lg:px-60'>
         <div>
           <h1 className="border border-white text-white mb-2 rounded-sm text-center font-semibold py-1 w-28">
             Loneliness
@@ -38,7 +38,7 @@ const CommonStruggles = () => {
       </div>
 
       {/*Section-4*/}
-      <div style={{background: "linear-gradient(253deg, rgba(1, 41, 244, 0.20) 0%, rgba(1, 12, 74, 0.20) 100%);"}} className=' lg:h-[388px] lg:flex gap-28 mt-3 lg:mt-28 justify-center items-center'>
+      <div style={{background: "linear-gradient(253deg, rgba(1, 41, 244, 0.20) 0%, rgba(1, 12, 74, 0.20) 100%);"}} className=' lg:h-[388px] lg:flex gap-28 mt-3 lg:mt-28 justify-between lg:px-60 items-center'>
         <div>
           <Image src='/bullying.png'
             alt='profile'
@@ -62,7 +62,7 @@ const CommonStruggles = () => {
 
       
       {/*Section-5*/}
-      <div className='lg:flex gap-28 mt-28 justify-center'>
+      <div className='lg:flex gap-28 mt-28 justify-between lg:px-60'>
         <div>
           <h1 className="border border-white text-white mb-2 rounded-sm text-center font-semibold py-1 w-50">
             Alcohol & Recovery

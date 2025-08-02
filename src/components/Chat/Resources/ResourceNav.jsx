@@ -103,15 +103,15 @@ const sampleWorkbooks = [
   };
 
   return (
-    <div className="py-5">
+    <div style={{fontFamily:"nunito, sans-serif"}} className="py-5">
       {/* Navigation Bar */}
-      <div className="bg-[#0e1c33] flex flex-wrap items-center gap-3 text-white rounded-lg mb-8">
+      <div  className="bg-[#0e1c33] flex flex-wrap items-center gap-3 text-white rounded-lg mb-8">
         {filterCategories.map((category) => (
           <div
             key={category}
             className={`rounded-md px-5 py-4 cursor-pointer transition-all duration-300 ${
               activeFilter === category
-                ? "bg-primary"
+                ? "bg-[#0056F6]"
                 : "bg-transparent hover:bg-primary/20"
             }`}
             onClick={() => handleFilterChange(category)}

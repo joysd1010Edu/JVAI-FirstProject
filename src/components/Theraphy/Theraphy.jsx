@@ -8,15 +8,15 @@ const Theraphy = () => {
     <div className='pb-10 bg-black text-white px-4 lg:px-0'>
       {/*Section-2*/}
       <div style={{
-        background: 'radial-gradient(circle at center, #0129F470 5%, rgba(1, 12, 74, 0.20) 50%, #010C4A33 70%)',
+        background: 'radial-gradient(circle at center, #0B3B91 0%, #0A1A4F 50%, #000008 100%)',
       }} className='lg:h-[532px] py-5 lg:py-0 flex justify-center items-center text-center px-4'>
         <p className='lg:py-14 text-2xl lg:text-[66px]  font-serif font-bold'>Explore personalized, <span className='text-blue-600 italic font-playfair'>AI-guided</span> <br /> therapy approaches tailored to your <br />needs.</p>
       </div>
 
       {/*Section-2*/}
-      <div className='lg:flex gap-28 mt-28 justify-center'>
-        <div>
-          <h1 className="border border-white text-white mb-2 rounded-sm text-center font-semibold py-1 w-72">
+      <div className='lg:flex gap-28 mt-28 justify-center lg:px-60 '>
+        <div className=''>
+          <h1 className="border border-white text-white mb-2 rounded-sm text-center font-semibold py-1  w-72">
             Cognitive Behavioral Therapy (CBT)
           </h1>
           <h1 className=' text-2xl lg:text-4xl font-semibold mb-3'>Anxiety, depression, <span className='text-blue-600 italic font-semibold'>negative</span> thought <br /> patterns.</h1>
@@ -36,6 +36,7 @@ const Theraphy = () => {
             alt='profile'
             width={550}
             height={550}
+            className=''
           />
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono, Playfair_Display, Inter, Nunito } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display, Inter, Nunito, Lemon, Kalam } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
@@ -29,6 +29,13 @@ const geistMono = Geist_Mono({
 
 const inter = Inter({ subsets: ['latin'] })
 
+const lemon = Lemon({
+  subsets: ['latin'],
+  variable: '--font-lemon',
+  weight: ['400', ], // adjust weights as needed
+  display: 'swap',
+});
+
 const nunito = Nunito({
   subsets: ['latin'],
   variable: '--font-nunito',
@@ -36,6 +43,12 @@ const nunito = Nunito({
   display: 'swap',
 });
 
+const kalam = Kalam({
+  subsets: ['latin'],
+  variable: '--font-kalam',
+  weight: ['400', '700'], // adjust weights as needed
+  display: 'swap',
+});
 
 export const metadata = {
   title: {
@@ -51,7 +64,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={playfair.variable} >
+    <html lang="en" className={`${playfair.variable} ${lemon.variable} ${kalam.variable}`} >
       <head>
         <link rel="icon" href="/logo.png" type="image/png" />
       </head>

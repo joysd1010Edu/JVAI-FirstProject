@@ -277,13 +277,13 @@ const Ratting = () => {
           ) : (
             plans &&
             plans.map((plan, index) => (
-              <div
+              <div style={{fontFamily:"nunito, sans-serif"}}
                 key={plan.id}
                 className="lg:w-[424px] relative hover:border-white border-transparent duration-300 border-2 min-h-[520px] bg-[#001742] rounded-xl flex flex-col justify-between p-6"
               >
                 
                 <div>
-                  <h1 className="lg:mt-8 text-[#3179FF] text-3xl text-center">
+                  <h1 className="lg:mt-8 text-[#3179FF] text-3xl font-bold font-nunito text-center">
                     {plan.name}
                   </h1>
                   <h3 className="mt-2.5 text-xl text-white text-center">
