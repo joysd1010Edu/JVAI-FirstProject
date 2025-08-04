@@ -253,11 +253,11 @@ export const useTaskLogic = () => {
   useEffect(() => {
     fetchGratitudeEntries();
     fetchStreakData();
-  }, []);
+  }, [axios]);
 
   useEffect(() => {
     fetchaffirmation();
-  }, [affirmationCompleted]);
+  }, [axios,affirmationCompleted]);
 
   return {
     // State

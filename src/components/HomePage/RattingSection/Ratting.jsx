@@ -36,13 +36,14 @@ const Ratting = () => {
   const priceRef = useRef(null);
 
   const fetchPlans = async () => {
-    const normal = await fetch('http://10.10.12.53:8000/api/subscriptions/plans/');
+    const normal = await fetch('http://emothrive.net/api/subscriptions/plans/');
     const data = await normal.json();
     setLoading(true);
     setError(null);
 
     try {
       const response = await axios.get("/api/subscriptions/plans/");
+
 
       setPlans(response.data);
     } catch (error) {
@@ -273,6 +274,10 @@ const Ratting = () => {
               >
                 Retry
               </button>
+            </div>
+          ) : !plans || (Array.isArray(plans) && plans.length === 0) ? (
+            <div className="bg-[#001742] p-8 rounded-xl text-center">
+              <p className="text-white text-lg">No plans available</p>
             </div>
           ) : (
             plans &&

@@ -12,7 +12,7 @@ export const GoogleBtnBackend = () => {
       // 3. We send the access_token to our backend
       try {
         const res = await fetch(
-          "http://10.10.12.53:8000/users/auth/google/",
+          "http://emothrive.net/users/auth/google/",
           {
             method: "POST",
             headers: {
