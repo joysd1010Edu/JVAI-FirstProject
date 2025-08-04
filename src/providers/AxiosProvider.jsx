@@ -34,7 +34,7 @@ axiosInstance.interceptors.request.use(
     }
     
     if (config.url && !config.url.startsWith('http') && config.url.startsWith('/api')) {
-      
+      config.url = `https://emothrive.net${config.url}`;
     }
     
     return config;
