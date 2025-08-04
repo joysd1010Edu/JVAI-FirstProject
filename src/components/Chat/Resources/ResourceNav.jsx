@@ -8,8 +8,8 @@ const sampleWorkbooks = [
   {
     "id": 1,
     "title": "Mental health",
-    "banner": "http://emothrive.net/media/workbooks/banners/Screenshot_2025-07-19_052733.png",
-    "pdf_file": "http://emothrive.net/media/workbooks/pdfs/mental_health_pdf_1.pdf",
+    "banner": "https://emothrive.net/media/workbooks/banners/Screenshot_2025-07-19_052733.png",
+    "pdf_file": "https://emothrive.net/media/workbooks/pdfs/mental_health_pdf_1.pdf",
     "category": {
       "id": 1,
       "name": "Dream"

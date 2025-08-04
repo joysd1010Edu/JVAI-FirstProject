@@ -51,7 +51,7 @@ const samplePlans = [
 export async function GET() {
   try {
     // Try to fetch from external API first
-    const externalApiUrl = 'https://stirring-camel-exotic.ngrok-free.app/api/subscriptions/plans/';
+    const externalApiUrl = 'YOUR_BACKEND_API_URL/api/subscriptions/plans/';
     
     try {
       const response = await axios.get(externalApiUrl, {

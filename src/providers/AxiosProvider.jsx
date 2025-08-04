@@ -5,7 +5,7 @@ import { removeTokens, getTokens, setTokens, shouldRefreshToken } from '@/lib/au
 
 
 const axiosInstance = axios.create({
-  baseURL: 'http://emothrive.net/', 
+  baseURL: 'https://emothrive.net/', 
   timeout: 10000, 
   headers: {
     'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ axiosInstance.interceptors.response.use(
         if (tokens.refresh) {
           console.log(' Attempting to refresh access token...');
 
-          const refreshResponse = await axios.post('http://emothrive.net/users/token/refresh/', {
+          const refreshResponse = await axios.post('https://emothrive.net/users/token/refresh/', {
             refresh: tokens.refresh
           });
           

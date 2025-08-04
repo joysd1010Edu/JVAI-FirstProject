@@ -170,7 +170,7 @@ export const ResourceCard = ({ workbook, onFavoritesUpdate }) => {
 
   const getPdfUrl = () => {
     console.log("Fetching PDF URL:", workbook.pdf_file);
-    return `http://10.10.12.53:8000${workbook.pdf_file}`;
+    return workbook.pdf_file;
   };
 
   const handleViewPdf = () => {

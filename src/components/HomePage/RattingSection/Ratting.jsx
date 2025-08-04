@@ -36,15 +36,11 @@ const Ratting = () => {
   const priceRef = useRef(null);
 
   const fetchPlans = async () => {
-    const normal = await fetch('http://emothrive.net/api/subscriptions/plans/');
-    const data = await normal.json();
     setLoading(true);
     setError(null);
 
     try {
       const response = await axios.get("/api/subscriptions/plans/");
-
-
       setPlans(response.data);
     } catch (error) {
       console.error("Error fetching plans:", error);
