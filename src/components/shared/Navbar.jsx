@@ -19,15 +19,28 @@ const Navbar = () => {
             path: '/about-us'
         },
         {
-            title: 'Types of Theraphy',
+            title: 'Types of Therapy',
             path: '/theraphy'
         },
         {
             title: 'Common Struggles',
             path: '/commonStruggles'
         },
+        {
+            title: 'Our Pricing Plans',
+            path: '/pricingPlans'
+        },
+       
+ 
     ]
-
+const scrollToFeature = (e) => {
+  e.preventDefault();
+  localStorage.setItem('scrollToFeature', 'true');
+  const featureSection = document.getElementById('feature_section');
+  if (featureSection) {
+    featureSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+};
     return (
         <div >
             <div>
@@ -56,7 +69,14 @@ const Navbar = () => {
                                     <Link className={` font-semibold ${pathName === navItem.path ? "text-[#0056F6]" : ""}`} href={navItem.path} key={navItem.path}>{navItem.title}</Link>
                                 ))
                             }
-                        </ul>
+<a
+        href="#feature_section"
+        className="cursor-pointer font-semibold"
+        onClick={scrollToFeature}
+    >
+        How We Work
+    </a>                      
+  </ul>
                     </div>
                     <div className="navbar-end">
                         <Link href={'/chat'} className='bg-[#0056F6] text-white rounded-[38px] py-[10px] px-[20px] outline-none'>Try Free AI Therapy</Link>

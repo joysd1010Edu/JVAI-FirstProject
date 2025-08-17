@@ -8,12 +8,12 @@ import { useSearchParams } from 'next/navigation';
 const therapyData = {
   a: {
     title: 'Cognitive Behavioral Therapy (CBT)',
-    description: `CBT is a widely used, evidence-based form of therapy that focuses on identifying and challenging negative thought patterns and replacing them with healthier alternatives. It is especially effective in treating anxiety, depression, and stress-related disorders. Through real-time AI support and structured techniques like journaling, exposure tasks, and goal-setting, CBT helps clients build resilience and regain control over their thoughts and emotions.`,
+    description: `CBT is a widely used, evidence-based form of therapy that focuses on identifying and challenging negative thought patterns and replacing them with healthier alternatives. It is especially effective in treating anxiety, depression, and stress-related disorders. Through real-time AI support and structured techniques like journaling, and goal-setting, CBT helps clients build resilience and regain control over their thoughts and emotions.`,
     image: '/project-image/rectangle.png',
   },
   b: {
     title: 'Dialectical Behavior Therapy (DBT)',
-    description: `DBT integrates cognitive-behavioral techniques with concepts of mindfulness and acceptance. Originally developed for borderline personality disorder, DBT is now used to treat trauma, emotional dysregulation, and suicidal behaviors. This therapy emphasizes four core skills: mindfulness, emotional regulation, distress tolerance, and interpersonal effectiveness — supported by interactive AI feedback and daily check-ins.`,
+    description: `DBT integrates cognitive-behavioral techniques with concepts of mindfulness and acceptance. Originally developed for borderline personality disorder, DBT is used to treat trauma, emotional dysregulation, and suicidal behaviors. This therapy emphasizes four core skills: mindfulness, emotional regulation, distress tolerance, and interpersonal effectiveness — supported by interactive AI feedback and daily check-ins.`,
     image: '/project-image/rectangle2.png',
   },
   c: {

@@ -36,18 +36,18 @@ const Footer = () => {
         <div>
           <h1 className="text-[#0056F6] font-bold text-lg">Quick Links</h1>
           <div className="flex flex-col">
-            <a href="#" className="text-white mb-2.5 mt-5">
+            <Link href="/" className="text-white mb-2.5 mt-5">
               Home
-            </a>
-            <a href="#" className="text-white mb-2.5">
+            </Link>
+            <Link href="/about-us" className="text-white mb-2.5">
               About Us
-            </a>
-            <a href="#" className="text-white mb-2.5">
+            </Link>
+            <Link href="/theraphy" className="text-white mb-2.5">
               Types of Therapy
-            </a>
-            <a href="#" className="text-white mb-2.5">
+            </Link>
+            <Link href="/commonStruggles" className="text-white mb-2.5">
               Common Struggles
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -57,23 +57,21 @@ const Footer = () => {
             <div>
               <IoMdCall />
             </div>
-            <div>+1 (555) 123-4567</div>
+            <div>9144317177</div>
           </div>
 
           <div className="flex items-center text-white gap-1 mb-2.5">
             <div>
               <MdEmail />
             </div>
-            <div>info@menthal.com</div>
+            <div>support@emothrive.app</div>
           </div>
 
-          <div className="flex items-center text-white gap-1 mb-2.5">
-            <div>
-              <CiLocationOn />
+           <div className=' text-white flex item-center gap-2'>
+              <div><CiLocationOn /></div>
+              <div>I45 Pine Haven Shores Rd. Ste 2213, Shelburne, Vermont, 05482</div>
             </div>
-            <div>123 Brand Street, NY 10001</div>
           </div>
-        </div>
 
         <div>
           <h1 className="text-[#0056F6] font-bold text-lg">Newsletter</h1>

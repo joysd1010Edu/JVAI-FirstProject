@@ -52,8 +52,8 @@ const kalam = Kalam({
 
 export const metadata = {
   title: {
-    default: "Home | Emothrive",
-    template: "%s | Emothrive",
+    default: "Home | Emothrive Therapy App",
+    template: "%s | Emothrive Therapy App",
   },
    description: "Emothrive is a modern web platform designed to enhance emotional well-being through personalized resources and user-friendly tools.",
     keywords: ["Emothrive", "mental health", "emotional well-being", "self-care", "wellness platform"],

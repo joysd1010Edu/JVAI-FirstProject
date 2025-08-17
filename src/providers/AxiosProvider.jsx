@@ -98,7 +98,7 @@ axiosInstance.interceptors.response.use(
         if (tokens.refresh) {
           console.log(' Attempting to refresh access token...');
 
-          const refreshResponse = await axios.post('https://emothrive.net/users/token/refresh/', {
+          const refreshResponse = await axios.post('https://emothrive.net/api/users/token/refresh/', {
             refresh: tokens.refresh
           });
           

@@ -22,29 +22,42 @@ const PaymentSuccessContent = () => {
   const axios = useAxios();
   const [verificationStatus, setVerificationStatus] = useState('pending'); // 'pending', 'success', 'failed'
 
+
   useEffect(() => {
-    if (session_id) {
-      const verifySession = async () => {
-        try {
-          const response = await axios.post('/api/subscriptions/verify-subscription/', { session_id });
-          if (response.status === 200) {
-            setTimeout(() => {
-              setVerificationStatus('success');
-            }, 1000);
-          } else {
+  if (session_id) {
+    let attempts = 0;
+    const maxAttempts = 5;
+
+    const interval = setInterval(async () => {
+      try {
+        const response = await axios.post('/api/subscriptions/verify-subscription/', { session_id });
+
+        if (response.status === 200) {
+          clearInterval(interval); // Stop retrying
+          setVerificationStatus('success');
+        } else {
+          attempts++;
+          if (attempts >= maxAttempts) {
+            clearInterval(interval);
             setVerificationStatus('failed');
           }
-        } catch (error) {
-          console.error('Error verifying session:', error);
+        }
+      } catch (error) {
+        console.error('Error verifying session:', error);
+        attempts++;
+        if (attempts >= maxAttempts) {
+          clearInterval(interval);
           setVerificationStatus('failed');
         }
-      };
+      }
+    }, 2000); // Retry every 2 seconds
 
-      verifySession();
-    } else {
-      setVerificationStatus('failed');
-    }
-  }, [session_id]);
+    return () => clearInterval(interval); // Cleanup on component unmount
+  } else {
+    setVerificationStatus('failed');
+  }
+}, [session_id]);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#010C4A] to-black text-white flex flex-col items-center justify-center p-4">

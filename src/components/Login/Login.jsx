@@ -47,7 +47,7 @@ const Login = () => {
     const { email } = data;
     console.log(email,data);
     try {
-      const response = await axios.post("/users/password/reset/", { email });
+      const response = await axios.post("/api/users/password/reset/", { email });
       if (response.status === 200) {
         Swal.fire({
           title: "Reset Link Sent!",
@@ -79,7 +79,7 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const response = await axios.post("/users/login/", { email, password });
+      const response = await axios.post("/api/users/login/", { email, password });
       if (response.status === 201 || response.status === 200) {
         const { access, refresh, user } = response.data;
 

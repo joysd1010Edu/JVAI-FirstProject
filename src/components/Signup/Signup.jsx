@@ -82,7 +82,7 @@ const Signup = () => {
     };
     setLoading(true);
     try {
-      const response = await axios.post("/users/register/", user);
+      const response = await axios.post("/api/users/register/", user);
       if (response.status === 201 || response.status === 200) {
         const { access, refresh } = response.data;
 

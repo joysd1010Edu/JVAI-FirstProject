@@ -155,7 +155,7 @@ const Ratting = () => {
         impact.
       </h1>
       <div className="mt-16">
-        {/*Card*/}
+      
         <div className="mt-[60px] lg:flex lg:gap-6 justify-center">
           <div className="lg:w-[424px] text-black h-[267px] py-11 px-6 border-1 border-[#76A6FF] rounded-xl text-center bg-[#76A6FF] transition duration-300 mb-2">
             <Image
@@ -166,7 +166,7 @@ const Ratting = () => {
               className="mx-auto"
             />
             <h1 className="font-bold text-xl mt-5 mb-3">Robert Fox</h1>
-            {/*Star Icon*/}
+           
             <div className="flex justify-center mb-3">
               <MdOutlineStar className="text-xl text-blue-600" />
               <MdOutlineStar className="text-xl text-blue-600" />
@@ -187,7 +187,7 @@ const Ratting = () => {
               className="mx-auto"
             />
             <h1 className="font-bold text-xl mt-5 mb-3">Devon Lane</h1>
-            {/*Star Icon*/}
+            
             <div className="flex justify-center mb-3">
               <MdOutlineStar className="text-xl text-blue-600" />
               <MdOutlineStar className="text-xl text-blue-600" />
@@ -208,7 +208,7 @@ const Ratting = () => {
               className="mx-auto"
             />
             <h1 className="font-bold text-xl mt-5 mb-3">Courtney Henry</h1>
-            {/*Star Icon*/}
+            
             <div className="flex justify-center mb-3 text-blue-600">
               <MdOutlineStar className="text-xl text-blue-600" />
               <MdOutlineStar className="text-xl text-blue-600" />
@@ -221,8 +221,7 @@ const Ratting = () => {
             </p>
           </div>
         </div>
-      </div>
-
+      </div> 
       {/*Our Pricing Plans*/}
       <div id="pricing-section">
         <div className="flex justify-center mt-24">

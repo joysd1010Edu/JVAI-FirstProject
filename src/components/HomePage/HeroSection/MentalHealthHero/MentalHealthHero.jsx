@@ -1,7 +1,75 @@
+'use client';
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef } from "react";
+
+export const featureRefExport = {current: null};
 
 const MentalHealthHero = () => {
+const featureRef = useRef(null);
+
+  const scrollToElement = (element) => {
+    if (!element) return;
+    
+    try {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    } catch (error) {
+      const y = element.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  useEffect(() => {
+    const checkAndScroll = () => {
+      const shouldScroll = localStorage.getItem('scrollToFeature') === 'true';
+      const urlHash = window.location.hash;
+      const hasHashTarget = urlHash === '#feature_section';
+      
+      if (shouldScroll || hasHashTarget) {
+        setTimeout(() => {
+          if (featureRef.current) {
+            scrollToElement(featureRef.current);
+          }
+          localStorage.removeItem('scrollToFeature');
+        }, 800);
+      }
+    };
+    
+    checkAndScroll();
+    
+    const handlePopState = () => {
+      checkAndScroll();
+    };
+    
+    window.addEventListener('popstate', handlePopState);
+    
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+  
+  // Update exported ref when the internal ref changes and also check for scroll after plans loaded
+  useEffect(() => {
+    if (featureRef.current) {
+      featureRefExport.current = featureRef.current;
+      
+      // Check if we still need to scroll (in case the first attempt failed)
+      const shouldScroll = localStorage.getItem('scrollToFeature') === 'true';
+      if (shouldScroll) {
+        const timer = setTimeout(() => {
+          scrollToElement(featureRef.current);
+          localStorage.removeItem('scrollToFeature');
+        }, 500);
+        
+        return () => clearTimeout(timer);
+      }
+    }
+  }, []);
   return (
     <div className=" bg-black px-6">
       <marquee className="mt-[20px]">
@@ -39,7 +107,7 @@ const MentalHealthHero = () => {
         </div>
       </marquee>
       <hr className="bg-blue-600 h-[1px] border-none mt-4" />
-      <div className="flex justify-center mt-24">
+      <div className="flex justify-center mt-24" id="feature_section"  ref={featureRef}>
         <h1 className="text-white border border-white rounded-sm w-32 text-center">
           How We Work
         </h1>
@@ -60,7 +128,7 @@ const MentalHealthHero = () => {
           </p>
         </div>
         <div className=" text-white lg:w-[424px] h-[267px] hover:text-black py-11 px-6 border-1 border-[#76A6FF] hover:bg-[#76A6FF] rounded-xl text-center transition duration-300 mb-2">
-          <h1 className="font-bold text-xl">Step 1</h1>
+          <h1 className="font-bold text-xl">Step 2</h1>
           <h1 className="font-bold text-xl mt-7 mb-5">
             Chat or Speak with AI Therapist
           </h1>
@@ -69,7 +137,7 @@ const MentalHealthHero = () => {
           </p>
         </div>
         <div className=" text-white lg:w-[424px] h-[267px] hover:text-black py-11 px-6 border-1  rounded-xl text-center  border-[#76A6FF] hover:bg-[#76A6FF] transition duration-300">
-          <h1 className="font-bold text-xl">Step 1</h1>
+          <h1 className="font-bold text-xl">Step 3</h1>
           <h1 className="font-bold text-xl mt-7 mb-5">
             Track Progress & Get Daily Guidance
           </h1>

@@ -47,7 +47,7 @@ const Content = () => {
     console.log('New password:', password);
     console.log('Confirm password:', confirmPassword);
     try {
-      const response = await axios.post(`/users/password/reset/confirm/${uid}/${token}`, { new_password: password, new_password_confirm: confirmPassword });
+      const response = await axios.post(`/api/users/password/reset/confirm/${uid}/${token}`, { new_password: password, new_password_confirm: confirmPassword });
       console.log('Password reset response:', response);
       if (response.status === 200) {
         Swal.fire({
@@ -154,8 +154,6 @@ if (!uid || !token) {
             Set Password
           </button>
         </form>
-        <p>{uid}</p>
-        <p>{token}</p>
         </div>
     </div>
   );

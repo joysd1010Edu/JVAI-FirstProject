@@ -26,7 +26,7 @@ function VerifyContent() {
 
     const verifyEmail = async () => {
       try {
-        const response = await axios.get(`/users/email/verify/${uid}/${token}/`);
+        const response = await axios.get(`/api/users/email/verify/${uid}/${token}/`);
         if (response.status === 200) {
           setStatus('success');
           setMessage('Email verified successfully!');

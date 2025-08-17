@@ -11,7 +11,7 @@ const ProfileDialog = () => {
     const [userData, setUserData] = useState({});
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const fetchUserData=async()=>{
-    const response = await axios.get('/users/profile/')
+    const response = await axios.get('/api/users/profile/')
     console.log('User data fetched:', response.data); 
     if (response.status === 200) {
       setUserData(response.data);
@@ -24,7 +24,7 @@ const ProfileDialog = () => {
 
   const handleUpdateProfile = async (updatedData) => {
     try {
-        const response = await axios.patch('/users/profile/', updatedData);
+        const response = await axios.patch('/api/users/profile/', updatedData);
         if (response.status === 200) {
             setUserData(response.data);
             console.log('Profile updated successfully:', response.data);

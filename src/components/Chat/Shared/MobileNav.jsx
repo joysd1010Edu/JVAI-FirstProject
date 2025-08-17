@@ -74,7 +74,7 @@ const MobileNav = ({ isOpened, toggleOpen }) => {
         <div className="px-4 py-4">
           <div className=" flex justify-between items-center">
               <h1 style={{fontFamily:"lemon, cursive"}} className="text-md font-lemon" >
-                Emothrive Therapy
+                Emothrive Therapy App
               </h1>
               <button
                 onClick={toggleOpen}

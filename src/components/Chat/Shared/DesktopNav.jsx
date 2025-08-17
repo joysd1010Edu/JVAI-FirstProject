@@ -72,7 +72,7 @@ console.log(subscription, "subscription in desktop nav");
         <div className="px-4 py-4">
           {!isCollapsed ? (
             <div className=" flex justify-between items-center">
-              <h1 style={{fontFamily:"lemon, cursive"}} className="text-md font-lemon">Emothrive Therapy</h1>
+              <h1 style={{fontFamily:"lemon, cursive"}} className="text-md font-lemon">Emothrive Therapy App</h1>
               <button
                 onClick={toggleNav}
                 className={`p-2 rounded-md group hover:bg-white hover:text-[#0056F6] transition-all`}
