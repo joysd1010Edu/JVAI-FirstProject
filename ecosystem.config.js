@@ -16,7 +16,7 @@ module.exports = {
 
         // Add these only if you're using next-auth or any services in frontend
         GOOGLE_CLIENT_ID: ,
-        GOOGLE_CLIENT_SECRET:
+        GOOGLE_CLIENT_SECRET: ,
       },
     },
   ],

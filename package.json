@@ -10,8 +10,8 @@
     "copy-pdf-assets": "node copy-pdf-worker.js",
     "postinstall": "npm run copy-pdf-assets"
   },
-  
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
@@ -32,8 +32,9 @@
     "react-markdown": "^10.1.0",
     "react-pdf": "^10.0.1",
     "remark-gfm": "^4.0.1",
-    "sweetalert2": "^11.22.2",
-    "tailwind-merge": "^3.3.1"
+    "sweetalert2": "^11.22.4",
+    "tailwind-merge": "^3.3.1",
+    "useref": "^1.4.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

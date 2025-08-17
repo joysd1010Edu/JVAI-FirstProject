@@ -30,17 +30,18 @@ const Navbar = () => {
             title: 'Our Pricing Plans',
             path: '/pricingPlans'
         },
-       
- 
+
+
     ]
-const scrollToFeature = (e) => {
-  e.preventDefault();
-  localStorage.setItem('scrollToFeature', 'true');
-  const featureSection = document.getElementById('feature_section');
-  if (featureSection) {
-    featureSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-};
+    const scrollToFeature = (e) => {
+        e.preventDefault();
+        localStorage.setItem('scrollToFeature', 'true');
+        window.location.href = "/"; 
+        const featureSection = document.getElementById('feature_section');
+        if (featureSection) {
+            featureSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
     return (
         <div >
             <div>
@@ -60,7 +61,7 @@ const scrollToFeature = (e) => {
                                 }
                             </ul>
                         </div>
-                        <Link href={'/'}><Image className='hidden lg:block' src='/logo.png' alt='website_logo' width={30} height={30}/></Link>
+                        <Link href={'/'}><Image className='hidden lg:block' src='/logo.png' alt='website_logo' width={50} height={50} /></Link>
                     </div>
                     <div className="navbar-center hidden lg:flex ">
                         <ul className="menu menu-horizontal gap-10 px-1 text-[20px] text-white">
@@ -69,14 +70,14 @@ const scrollToFeature = (e) => {
                                     <Link className={` font-semibold ${pathName === navItem.path ? "text-[#0056F6]" : ""}`} href={navItem.path} key={navItem.path}>{navItem.title}</Link>
                                 ))
                             }
-<a
-        href="#feature_section"
-        className="cursor-pointer font-semibold"
-        onClick={scrollToFeature}
-    >
-        How We Work
-    </a>                      
-  </ul>
+                            <a
+                                href="/"
+                                className="cursor-pointer font-semibold"
+                                onClick={scrollToFeature}
+                            >
+                                How We Work
+                            </a>
+                        </ul>
                     </div>
                     <div className="navbar-end">
                         <Link href={'/chat'} className='bg-[#0056F6] text-white rounded-[38px] py-[10px] px-[20px] outline-none'>Try Free AI Therapy</Link>

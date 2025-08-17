@@ -67,10 +67,14 @@ const TheraphyDetailsContent = () => {
             <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start mt-2">
               <Link
                 href="/theraphy"
-                className="px-8 py-3 text-lg font-bold rounded bg-violet-400 dark:bg-[#ff3811] text-gray-900 dark:text-gray-50 hover:bg-sky-700 hover:text-white duration-1000 ease-in-out"
+                className="px-8 py-[10px] text-lg font-bold rounded-[38px] bg-violet-400 dark:bg-[#ff3811] text-gray-900 dark:text-gray-50 hover:bg-sky-700 hover:text-white duration-1000 ease-in-out"
               >
                 Back to theraphy
               </Link>
+
+              <div className="navbar-end">
+                        <Link href={'/chat'} className='bg-[#0056F6] text-lg text-white rounded-[38px] py-[10px] px-[20px] outline-none'>Try Free AI Therapy</Link>
+                    </div>
             </div>
           </div>
         </div>

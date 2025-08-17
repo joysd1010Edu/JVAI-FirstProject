@@ -9,7 +9,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className=" bg-[#001338] px-14 py-11 ">
+    <div className=" bg-[#001338] px-14 ">
       <div className="grid lg:grid-cols-4">
         <div>
           {/* <Image src='/project-image/Group 1.svg'
@@ -19,7 +19,7 @@ const Footer = () => {
           /> */}
 
           <Link href={"/"}>
-            <Image src="/logo.png" alt="website_logo" width={30} height={30} />
+            <Image src="/logo.png" alt="website_logo" width={50} height={50} />
           </Link>
           <p className="text-white mt-7">
             Crafting mindful experiences with <br /> intelligent therapy. Your
