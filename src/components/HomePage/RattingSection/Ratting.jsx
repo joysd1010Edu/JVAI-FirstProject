@@ -379,15 +379,15 @@ const Ratting = () => {
 
       {/*Contact Form*/}
        {/* Form*/}
-        <div className="bg-[#F3F3F3] p-12  rounded-lg lg:px-32 ">
+        <div className="bg-transparent p-5 text-white w-full md:w-1/2 rounded-lg lg:py-10 mx-auto ">
           <form  ref={form} onSubmit={sendEmail}>
             <div className="grid grid-cols-2 gap-5 w-full">
-              <input className="px-4 py-2 rounded-lg outline-none border-2 border-gray" name="user_name" type="text" placeholder="Your Name" />
+              <input className="px-4 py-2 rounded-lg outline-none border border-gray" name="user_name" type="text" placeholder="Your Name" />
 
-              <input className="px-4 py-2 rounded-lg outline-none border-2 border-gray" name="from_email" type="email" placeholder="Your Email" />
+              <input className="px-4 py-2 rounded-lg outline-none border border-gray" name="from_email" type="email" placeholder="Your Email" />
             </div>
-            <textarea className="w-full rounded-lg mt-6 text-stone-500 pl-2 pt-2 h-44 border-2 border-gray" required name="message" id="" placeholder="Message"></textarea>
-            <input className=" btn text-white w-full bg-blue-500 rounded-sm" type="submit" value="Send Message" />
+            <textarea className="w-full rounded-lg mt-6  pl-2 pt-2 h-44 border border-gray" required name="message" id="" placeholder="Message"></textarea>
+            <input className=" btn text-white w-full bg-blue-500 rounded-sm border-0" type="submit" value="Send Message" />
           </form>
         </div>
 

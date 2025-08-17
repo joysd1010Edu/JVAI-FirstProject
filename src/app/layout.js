@@ -66,7 +66,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${playfair.variable} ${lemon.variable} ${kalam.variable}`} >
       <head>
-        <link rel="icon" href="/logo.png" type="image/png" />
+        <link rel="icon" href="/sitelogo.png" type="image/png" />
       </head>
       <body
         className={`${inter.variable} antialiased ${nunito.variable}`}

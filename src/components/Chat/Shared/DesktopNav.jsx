@@ -87,7 +87,7 @@ console.log(subscription, "subscription in desktop nav");
                 className="w-10 h-10 flex items-center justify-center rounded-md text-xl text-[#0056F6] transition-colors font-bold"
               >
                 <Image
-                  src="/logo.png"
+                  src="/sitelogo.png"
                   alt="Logo"
                   width={40}
                   height={40}
