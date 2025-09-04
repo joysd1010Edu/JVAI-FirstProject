@@ -9,7 +9,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className=" bg-[#001338] px-14 ">
+    <div className=" bg-[#001338] px-14 py-10 ">
       <div className="grid lg:grid-cols-4">
         <div>
           {/* <Image src='/project-image/Group 1.svg'
@@ -19,7 +19,7 @@ const Footer = () => {
           /> */}
 
           <Link href={"/"}>
-            <Image src="/logo.png" alt="website_logo" width={50} height={50} />
+            <Image src="/sitelogo.png" alt="website_logo" width={50} height={50} />
           </Link>
           <p className="text-white mt-7">
             Crafting mindful experiences with <br /> intelligent therapy. Your
@@ -53,18 +53,12 @@ const Footer = () => {
 
         <div>
           <h1 className="text-[#0056F6] font-bold text-lg">Contact Us</h1>
-          <div className="flex items-center text-white gap-1 mt-5 mb-2.5">
-            <div>
-              <IoMdCall />
-            </div>
-            <div>9144317177</div>
-          </div>
 
           <div className="flex items-center text-white gap-1 mb-2.5">
             <div>
               <MdEmail />
             </div>
-            <div>support@emothrive.app</div>
+            <div>support@emothrive.health</div>
           </div>
 
            <div className=' text-white flex item-center gap-2'>

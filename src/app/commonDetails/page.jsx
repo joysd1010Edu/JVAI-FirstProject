@@ -7,28 +7,28 @@ import React, { Suspense } from 'react';
 // Therapy data object
 const therapyData = {
   d: {
-    title: "Loneliness Support",
-    description: `Loneliness isn’t just about being physically alone—it’s the deep, aching feeling of disconnection even when others are around. You might find it hard to express yourself, feel invisible in conversations, or struggle to maintain relationships. These feelings can lead to anxiety, depression, and a loss of self-worth. At EmoThrive, we provide interactive tools and emotionally intelligent AI support to help you explore your feelings, identify thinking patterns, and develop emotional resilience. You’ll be guided through reflections, daily coping strategies, and exercises to slowly rebuild your connection with yourself and others—because everyone deserves to feel seen, heard, and valued.`,
+    title: "Loneliness",
+    description: `Lonely isn't lonely. It's that yucky sensation when you can't connect with people for anything, and they're sitting next to you. It may be hard for you to communicate, or it doesn't feel like anyone listens when you do. Surviving friendships can sting, too. All this can make you feel anxious, blue, and as though you don't matter. At EmoThrive, we provide easy techniques and smart technology that gets it. We can help you look at how you feel, figure out how you think, and practice at getting through hard spots. We'll be there for you as you sort out what's going on for you, practice tiny tasks each day to help out, and find things that help you feel more like yourself and like everyone else. Everyone should feel seen, heard, and like they count.`,
     image: '/longliness.png',
   },
   e: {
-    title: "Bullying Recovery",
-    description: `Bullying can leave invisible scars that last long after the behavior stops. Whether you’ve experienced verbal abuse, exclusion, cyberbullying, or manipulation—at school, at home, or at work—the emotional damage can deeply impact your sense of self, safety, and trust. At EmoThrive, we understand how painful and confusing this journey can be. Through guided healing sessions, supportive reflections, and emotional regulation tools, we help you build the strength to confront past wounds and reclaim your personal power. You are not what happened to you—your story can be one of resilience, confidence, and healing.`,
+    title: "Bullying",
+    description: `Bullying can leave you with invisible wounds that remain. It may have come in the manner of name-calling, exclusion, cyberbullying, or an attempt at control. If it were at school, home, or work, it could upset your confidence, make you feel unsafe, and ruin your faith in other people. We know that this is not easy. We can help support you through sessions, reflection, and learning how to cope with your feelings. We'll help provide you with the strength for facing what happened and feeling positive about yourself again. What went down before that doesn't define you. You can still be strong and believe in yourself while getting over it.`,
     image: '/bullying.png',
   },
   f: {
     title: "Alcohol & Recovery",
-    description: `The journey through alcohol dependency or recovery is complex. It often comes with cycles of guilt, shame, secrecy, and isolation. You may find yourself questioning your worth or struggling to regain control over your thoughts and behaviors. EmoThrive provides a safe, judgment-free space where every small victory is celebrated. Our supportive platform helps you understand your triggers, manage emotional cravings, and reframe thoughts that sabotage your progress. You don’t have to walk this road alone—compassionate tools, daily check-ins, and personalized support are available every step of the way to help you heal and move forward with purpose.`,
+    description: `Attempting to quit drinking or become sober is often very hard. Feeling guilty, shameful, and lonely is normal. Self-questioning and feeling engulfed by one's own mind and actions are usual. EmoThrive is a non-judgmental, supportive space that rejoices in every small victory. EmoThrive helps you by discovering your triggers, building urge control, and restructuring the way you think in order to stay concentrated. You don't need to go through this alone. EmoThrive provides you with tools, every day support, and recovery resources that are available for one reason and one reason only—that you can recover and rebuild.`,
     image: '/alchole.png',
   },
   g: {
     title: "Work-Life Balance",
-    description: `When your career responsibilities begin to consume your time, energy, and emotional bandwidth, it's easy to lose sight of yourself. Chronic stress, burnout, and a blurred boundary between personal and professional life can affect your health, relationships, and inner peace. EmoThrive helps you step back and assess what balance truly looks like for you. Our guided self-reflection tools, habit planners, and emotional wellness practices support you in setting boundaries, managing guilt, and finding joy beyond productivity. You can be both successful and mentally well—it starts by putting yourself back on the priority list.`,
+    description: `It's easy to forget about yourself when work takes over your time and energy. Constant stress and not having a clear line between work and life can hurt your health, friendships, and happiness. EmoThrive can help you figure out what balance looks like for you. We have tools to help you think about things, plan habits, and care for your emotions, so you can set limits, feel less guilty, and find happiness in activities beyond work. You can be successful and feel good, as long as you start putting yourself first again.`,
     image: '/work_life.png',
   },
   h: {
-    title: "Relationship Conflicts",
-    description: `Relationships are deeply rewarding—but they can also be a source of pain, confusion, and emotional exhaustion. Whether you’re facing communication breakdowns with a partner, tension within your family, or betrayal by someone you trusted, the emotional toll can be overwhelming. At EmoThrive, we help you process these experiences, recognize unhealthy patterns, and strengthen your emotional awareness. Our tools guide you toward healthier boundaries, honest communication, and self-reflection so you can repair, release, or rebuild relationships in a way that aligns with your well-being.`,
+    title: "Relationship Problems",
+    description: `Relationships are great, but they can also hurt, confuse you, and drain your energy. Whether you're not talking well with your partner, having family drama, or were betrayed by someone you thought you could trust, it can be a lot to deal with. At EmoThrive, we can help you process these things, spot bad habits, and understand your feelings better. We'll give you the tools to create better boundaries, talk honestly, and think about yourself. This will help you fix, let go of, or rebuild relationships in a way that's good for you.`,
     image: '/relationship.png',
   },
   i: {
@@ -37,13 +37,13 @@ const therapyData = {
     image: '/procrastination.png',
   },
   j: {
-    title: "Low Self-Esteem",
-    description: `Self-esteem shapes how you see yourself, how you interact with others, and how you respond to life’s challenges. If you constantly doubt your worth, fear rejection, or feel like you’re never “enough,” it’s not just in your head—it’s a learned belief that can be unlearned. EmoThrive offers support to help you rewire those beliefs. Through self-reflective journaling, affirmations grounded in psychology, and gentle behavior shifts, you’ll begin to rediscover your strengths, honor your needs, and build a more compassionate relationship with yourself—because you are worthy, exactly as you are.`,
+    title: "Having Low Self-Worth?",
+    description: `The way you feel about yourself impacts everything – from your relationships to how you handle problems. If you're always questioning your value, scared of being turned away, or just feel like you don't measure up, remember it's something you've learned and can change. EmoThrive is here to back you. We can guide you to rethink those feelings through journaling, positive statements based on how your mind works, and small changes in what you do. You'll start to see what you're good at, value what you need, and be kinder to yourself. Because you matter, just as you are.`,
     image: '/low_self.png',
   },
   k: {
-    title: "Life in General",
-    description: `Sometimes, it’s not one big thing—it’s everything. Life can feel like an unpredictable storm of emotions, responsibilities, expectations, and uncertainty. You may feel mentally exhausted, emotionally numb, or unsure about what’s next. EmoThrive creates a calming, reflective space to sort through the chaos. Whether you’re experiencing grief, identity confusion, burnout, or just the weight of “too much,” our tools guide you gently back to clarity. By helping you process emotions, prioritize self-care, and find small, meaningful steps forward, we support you in making peace with the messiness of being human.`,
+    title: "Life, in general, can be a lot.",
+    description: `It's not always one huge problem; it's just...everything. Life feels like one crazy storm of feelings, duties, what people expect, and not knowing what will happen. You might feel super tired in your head, not feel much of anything, or just not know what to do next. EmoThrive gives you a chill place to think and figure things out. If you're sad, confused about who you are, burned out, or just have way too much on your plate, our stuff can help you get back on track. We can assist you deal with feelings, take care of yourself, and find small ways to move forward. We're here to help you be okay with how messy being a person can be`,
     image: '/project-image/rectangle2.png',
   },
 };
@@ -96,6 +96,9 @@ const TherapyContent = () => {
               >
                 Back to struggles
               </Link>
+              <div className="navbar-end">
+                <Link href={'/chat'} className='bg-[#0056F6] text-lg text-white rounded-[38px] py-[10px] px-[20px] outline-none'>Try Free AI Therapy</Link>
+              </div>
             </div>
           </div>
         </div>

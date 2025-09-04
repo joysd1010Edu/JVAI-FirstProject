@@ -69,7 +69,7 @@ const TheraphyDetailsContent = () => {
                 href="/theraphy"
                 className="px-8 py-[10px] text-lg font-bold rounded-[38px] bg-violet-400 dark:bg-[#ff3811] text-gray-900 dark:text-gray-50 hover:bg-sky-700 hover:text-white duration-1000 ease-in-out"
               >
-                Back to theraphy
+                Back to Therapy
               </Link>
 
               <div className="navbar-end">

@@ -151,12 +151,12 @@ const Ratting = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-    emailjs.init('LX9svQrEVuINGePQm'); 
+    emailjs.init('VkaADoDJVtUfVe4IG'); 
 
     emailjs
       .sendForm(
-        'service_a5654uh', 
-       'template_je41myo',
+        'service_dxtw13o', 
+       'template_0avbuy9',
         form.current
       )
       .then(
@@ -175,7 +175,6 @@ const Ratting = () => {
       );
 
   };
-
 
 
   return (
